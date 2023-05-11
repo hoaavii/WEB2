@@ -1,0 +1,116 @@
+/*contact*/
+#section2 {
+    height: 300px;
+    padding: 90px 30px;
+    text-align: center;
+}
+#subcribe {
+    width: 70%;
+    height: 300px;
+    padding: 40px;
+    margin: 0 auto;
+    border: #2b3928 solid 3px;
+    color: gray;
+    font-size: 17px;
+    text-align: center;
+}
+
+#subcribe .text {
+    padding-top: 20px;
+}
+
+#subcribe div {
+    padding: 5px;
+}
+.Newsletter_Inner input {
+    width: 60%;
+    height: 50px;
+    border: #ffefcd solid 2px;
+    font-size: 16px;
+    margin: 10px 2px;
+}
+
+.Newsletter_Inner .button {
+    height: 30px;
+    background-color: #feb142;
+    border-color: white;
+    color: white;
+}
+
+/* Plc */
+.plc {
+	background: #dae2dc;
+	/* overflow: hidden; */
+	font-size: 15px;
+	color: #333;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+.plc ul {
+	width: 100%;
+	text-align: center;
+}
+
+.plc li {
+	width: 20%;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	line-height: 20px;
+	border-right: solid 1px #bbb;
+	margin: 5px 0;
+}
+
+.plc li:last-child {
+	border-right: none;
+}
+
+/* ============= Footer ============= */
+.footer {
+	position: relative;
+	/* height: 40px; */
+	width: 100%;
+	background: #476;
+}
+
+.copy-right {
+	/* position: absolute; */
+	/* bottom: 0; */
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	font-size: 14px;
+	color: #ccc;
+	background-color: #252525;
+}
+
+.copy-right a {
+	color: #ccc;
+	transition: .2s ease;
+}
+
+.copy-right a:hover {
+	color: #fff;
+}
+
+/* ======= End Footer ======== */
+
+@media only screen and (max-width: 768px){
+	.plc {
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-top: 0;
+	border-bottom: 0;
+}
+	.plc li {
+	float: none;
+	width: 100%;
+	border-top: solid 1px #bbb;
+	border-bottom: solid 1px #bbb;
+	border-left: 0;
+	border-right: 0;
+	margin: 0;
+	text-align: center;
+	}
+}
