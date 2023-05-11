@@ -140,7 +140,7 @@ function changePass() {
     if (inps[0].value != currentUser.pass) {
         Swal.fire({
             type: 'error',
-            title: 'Sai mật khẩu'
+            title: 'Error Password'
         }).then((result) => {
             inps[0].focus();
         });
@@ -149,14 +149,14 @@ function changePass() {
     if (inps[1] == '') {
         Swal.fire({
             type: 'error',
-            title: 'Chưa nhập mật khẩu mới !'
+            title: 'Haven\'t entered a new password !'
         })
         inps[1].focus();
     }
     if (inps[1].value != inps[2].value) {
         Swal.fire({
             type: 'error',
-            title: 'Mật khẩu không khớp'
+            title: 'Error'
         }).then((result) => {
             inps[2].focus();
         });
@@ -177,7 +177,7 @@ function changePass() {
     Swal.fire({
         type: 'success',
         title: 'Xong',
-        text: 'Thay đổi mật khẩu thành công.'
+        text: 'Change password success.'
     }).then((result) => {
         inps[0].value = inps[1].value = inps[2].value = "";
         openChangePass();    
@@ -204,7 +204,7 @@ function changeInfo(iTag, info) {
             if (!currentUser.donhang.length) {
                 document.getElementsByClassName('listDonHang')[0].innerHTML = `
                     <h3 style="width=100%; padding: 50px; color: green; font-size: 2em; text-align: center"> 
-                        Xin chào ` + inp.value + `. Bạn chưa có đơn hàng nào.
+                        Hello ` + inp.value + `. You don't have any orders yet.
                     </h3>`;
             }
 
@@ -249,14 +249,14 @@ function addTatCaDonHang(user) {
     if (!user) {
         document.getElementsByClassName('listDonHang')[0].innerHTML = `
             <h3 style="width=100%; padding: 50px; color: red; font-size: 2em; text-align: center"> 
-                Bạn chưa đăng nhập !!
+            You are not logged in !!
             </h3>`;
         return;
     }
     if (!user.donhang.length) {
         document.getElementsByClassName('listDonHang')[0].innerHTML = `
             <h3 style="width=100%; padding: 50px; color: green; font-size: 2em; text-align: center"> 
-                Xin chào ` + currentUser.username + `. Bạn chưa có đơn hàng nào.
+            Hello ` + currentUser.username + `. You don't have any orders yet.
             </h3>`;
         return;
     }
@@ -276,12 +276,12 @@ function addDonHang(dh) {
                     </th>
                 </tr>
                 <tr>
-                    <th>STT</th>
-                    <th>Sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                    <th>Thời gian thêm vào giỏ</th> 
+                    <th>Num</th>
+                    <th>Product</th>
+                    <th>Cost</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>Time to add to cart</th> 
                 </tr>`;
 
     var totalPrice = 0;
@@ -317,7 +317,7 @@ function addDonHang(dh) {
 
     s += `
                 <tr style="font-weight:bold; text-align:center; height: 4em;">
-                    <td colspan="4">TỔNG TIỀN: </td>
+                    <td colspan="4">TOTAL: </td>
                     <td class="alignRight">` + numToString(totalPrice) + ` ₫</td>
                     <td > ` + dh.tinhTrang + ` </td>
                 </tr>

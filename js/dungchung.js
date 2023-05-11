@@ -95,8 +95,7 @@ function themVaoGioHang(masp, tensp) {
                 toast: true,
                 position: 'bottom-end',
                 type: 'success',
-                html: ' Đã thêm <strong>' + tensp + '</strong> vào giỏ.',
-                showConfirmButton: true,
+                html: ' Add <strong>' + tensp + '</strong> to cart.',
                 timer: 5000
             })
         }
@@ -179,9 +178,9 @@ function checkDangKy() {
             if(kq != null) {
                 Swal.fire({
                     type: 'success',
-                    title: 'Đăng kí thành công ' + kq.TaiKhoan,
-                    text: 'Bạn sẽ được đăng nhập tự động',
-                    confirmButtonText: 'Tuyệt'
+                    title: 'Sign Up Success' + kq.TaiKhoan,
+                    text: 'You will be logged in automatically',
+                    confirmButtonText: 'Great'
 
                 }).then((result) => {
                     capNhatThongTinUser();
@@ -192,7 +191,7 @@ function checkDangKy() {
         error: function(e) {
             Swal.fire({
                 type: "error",
-                title: "Lỗi",
+                title: "Error",
                 // html: e.responseText
             });
             console.log(e.responseText)
@@ -222,8 +221,9 @@ function checkDangNhap() {
             if(data != null) {
                 Swal.fire({
                     type: "success",
-                    title: "Đăng nhập thành công",
-                    text: "Chào " + data.Ho + " " + data.Ten
+                    title: "Logged in successfully",
+                    showConfirmButton: false,
+                    text: "Hello " + data.Ho + " " + data.Ten
                 }).then((result) => {
                     capNhatThongTinUser();
                 });
@@ -232,14 +232,14 @@ function checkDangNhap() {
             } else {
                 Swal.fire({
                     type: "error",
-                    title: "Tên tài khoản hoăc mật khẩu không đúng"
+                    title: "Username or password is incorrect"
                 });
             }
         },
         error: function(e) {
             Swal.fire({
                 type: "error",
-                title: "Lỗi khi đăng nhập",
+                title: "Error while logging in",
                 // html: e.responseText
             });
             console.log(e.responseText)
@@ -251,11 +251,12 @@ function checkDangNhap() {
 function checkDangXuat(onSuccess) {
     Swal.fire({
         type: 'question',
-        title: 'Xác nhận',
-        text: 'Bạn có chắc muốn đăng xuất?',
+        title: 'Confirm',
+        text: 'Are you sure you want to sign out?',
         showCancelButton: true,
-        confirmButtonText: 'Đồng ý',
-        cancelButtonText: 'Hủy'
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#feb142'
 
     }).then((result) => {
         if (result.value) {
@@ -271,7 +272,8 @@ function checkDangXuat(onSuccess) {
                     if(data == 'ok') {
                         Swal.fire({
                             type: "success",
-                            title: "Đăng xuất thành công"
+                            title: "Sign out successful",
+                            showConfirmButton: false
                         }).then((result) => {
                             capNhatThongTinUser();
                             setListGioHang(null);
@@ -283,14 +285,14 @@ function checkDangXuat(onSuccess) {
                     } else {
                         Swal.fire({
                             type: "error",
-                            title: "Chưa có ai đăng nhập"
+                            title: "No one has logged in yet"
                         })
                     }
                 },
                 error: function(e) {
                     Swal.fire({
                         type: "error",
-                        title: "Có lỗi khi đăng xuất",
+                        title: "There was an error logging out",
                         // html: e.responseText
                     })
                     console.log(e.responseText)
@@ -303,7 +305,7 @@ function checkDangXuat(onSuccess) {
 function capNhatThongTinUser() {
     getCurrentUser((data) => {
         if(!data) {
-            document.getElementById("btnTaiKhoan").innerHTML = '<i class="fa fa-user"></i> Tài khoản';
+            document.getElementById("btnTaiKhoan").innerHTML = '<i class="fa fa-user"></i> Account';
             document.getElementsByClassName("menuMember")[0].classList.add('hide');
 
         } else {
