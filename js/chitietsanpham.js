@@ -45,7 +45,7 @@ function addChiTietToWeb(p) {
     var divChiTiet = document.getElementsByClassName('chitietSanpham')[0];
 
     // Đổi title
-    document.title = p.TenSP + ' - Thế giới điện thoại';
+    document.title = p.TenSP + ' - Vegan Food';
 
     // Cập nhật tên h1
     var h1 = divChiTiet.getElementsByTagName('h1')[0];
@@ -86,15 +86,16 @@ function addChiTietToWeb(p) {
 
     // Cập nhật thông số
     var info = document.getElementsByClassName('info')[0];
-    var s = addThongSo('Màn hình', p.ManHinh);
-    s += addThongSo('Hệ điều hành', p.HDH);
-    s += addThongSo('Camara sau', p.CamSau);
-    s += addThongSo('Camara trước', p.CamTruoc);
-    s += addThongSo('CPU', p.CPU);
-    s += addThongSo('RAM', p.Ram);
-    s += addThongSo('Bộ nhớ trong', p.Rom);
-    s += addThongSo('Thẻ nhớ', p.SDCard);
-    s += addThongSo('Dung lượng pin', p.Pin);
+    var s = "";
+    // var s = addThongSo('Màn hình', p.ManHinh);
+    // s += addThongSo('Hệ điều hành', p.HDH);
+    // s += addThongSo('Camara sau', p.CamSau);
+    // s += addThongSo('Camara trước', p.CamTruoc);
+    // s += addThongSo('CPU', p.CPU);
+    // s += addThongSo('RAM', p.Ram);
+    // s += addThongSo('Bộ nhớ trong', p.Rom);
+    // s += addThongSo('Thẻ nhớ', p.SDCard);
+    // s += addThongSo('Dung lượng pin', p.Pin);
     info.innerHTML = s;
 
     // Cập nhật hình

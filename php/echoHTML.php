@@ -436,16 +436,17 @@ function addChiTietSanPham()
 {
     echo '
     <div class="chitietSanpham" style="min-height: 85vh">
-        <h1>Điện thoại </h1>
+    
         <div class="rowdetail group">
             <div class="picture">
                 <img src="">
             </div>
             <div class="price_sale">
+                <h1></h1>
                 <div class="area_price"> </div>
                 <div class="ship" style="display: none;">
                     <i class="fa fa-clock-o"></i>
-                    <div>NHẬN HÀNG TRONG 1 GIỜ</div>
+                    <div>Delivery in 1 hour</div>
                 </div>
                 <div class="area_promo">
                     <strong>khuyến mãi</strong>
@@ -471,12 +472,12 @@ function addChiTietSanPham()
                 <div class="area_order">
                     <!-- nameProduct là biến toàn cục được khởi tạo giá trị trong phanTich_URL_chiTietSanPham -->
                     <a class="buy_now" onclick="themVaoGioHang(maProduct, nameProduct);">
-                        <h3><i class="fa fa-plus"></i> Thêm vào giỏ hàng</h3>
+                        <h3><i class="fa fa-plus"></i> Add to cart</h3>
                     </a>
                 </div>
             </div>
             <div class="info_product">
-                <h2>Thông số kỹ thuật</h2>
+                <h2>Details</h2>
                 <ul class="info">
 
                 </ul>
