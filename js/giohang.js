@@ -67,11 +67,11 @@ function addProductToTable(listProduct) {
     var s = `
 		<tbody>
 			<tr>
-				<th>Sản phẩm</th>
-				<th>Giá</th>
-				<th>Số lượng</th>
-				<th>Thành tiền</th>
-				<th>Xóa</th>
+				<th>Product</th>
+				<th>Cost</th>
+				<th>Amount</th>
+				<th>Total</th>
+				<th>Detele</th>
 			</tr>`;
 
     if (!listProduct || listProduct.length == 0) {
@@ -125,17 +125,17 @@ function addProductToTable(listProduct) {
 
     s += `
 			<tr style="font-weight:bold; text-align:center">
-				<td colspan="3">TỔNG TIỀN: </td>
+				<td colspan="3">TOTAL: </td>
 				<td class="alignRight" style="color:red">` + numToString(totalPrice) + ` ₫</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td colspan="5">
 					<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="thanhToan()">
-						<i class="fa fa-usd"></i> Thanh Toán 
+						<i class="fa fa-usd"></i> Pay
 					</button> 
 					<button class="btn btn-danger" onclick="xoaHet()">
-						<i class="fa fa-trash-o"></i> Xóa hết 
+						<i class="fa fa-trash-o"></i>Remove all
 					</button>
 				</td>
 			</tr>
@@ -182,7 +182,7 @@ function thanhToan() {
         Swal.fire({
             type: 'info',
             title: "Rỗng",
-            grow: 'row',
+            with: '500px',
             text: 'Không có mặt hàng nào để thanh toán.'
         });
         return;
@@ -191,12 +191,14 @@ function thanhToan() {
     getCurrentUser((user) => {
         if (user == null) {
             Swal.fire({
-                title: 'Xin chào!',
-                text: 'Bạn cần đăng nhập để mua hàng',
+                title: 'Notification',
+                text: 'You need to login to make a purchase',
                 type: 'info',
-                grow: 'row',
-                confirmButtonText: 'Đăng nhập',
-                cancelButtonText: 'Trở về',
+                with: '500px',
+                confirmButtonText: 'Login',
+                cancelButtonText: 'Return',
+                confirmButtonColor: '#feb142',
+
                 showCancelButton: true
             }).then((result) => {
                 if (result.value) {
@@ -222,32 +224,32 @@ function thanhToan() {
         console.log(error.responseText);
     });
 }
-
+//noi dung form thanh toan
 function htmlThanhToan(userHienTai) {
 	console.log('abc')
 
 	$("#thongtinthanhtoan").html(`
 		<form>
 		  	<div class="form-group">
-		    <p>Tổng tiền : <h2>` + TotalPrice.toLocaleString() + `đ </h2></p>
+		    <p>Total : <h2>` + TotalPrice.toLocaleString() + `đ </h2></p>
 		  </div>
 		  <div class="form-group">
-		    <label for="inputTen">Tên người nhận</label>
+		    <label for="inputTen">Name</label>
 		    <input class="form-control input-sm" id="inputTen" required type="text" value="` + (userHienTai.Ho + " " + userHienTai.Ten) + `">
 		  </div>
 		   <div class="form-group">
-		    <label for="inputSDT">SDT người nhận</label>
+		    <label for="inputSDT">Phone number</label>
 		    <input class="form-control input-sm" id="inputSDT" required type="text" pattern="\\d*" minlength="10" maxlength="12" value="` + userHienTai.SDT + `">
 		  </div>
 		  <div class="form-group">
-		    <label for="inputDiaChi">Địa chỉ giao hàng</label>
+		    <label for="inputDiaChi">Address</label>
 		    <input class="form-control input-sm" id="inputDiaChi" required type="text" value="` + userHienTai.DiaChi + `">
 		  </div>
 		  <div class="form-group">
 		    <select class="browser-default custom-select" id="selectHinhThucTT">
-		      <option value="" disabled selected>Hình thức thanh toán</option>
-			  <option value="Trực tiếp khi nhận hàng">Trực tiếp khi nhận hàng</option>
-			  <option value="Qua thẻ ngân hàng">Qua thẻ ngân hàng</option>
+		      <option value="" disabled selected>Payments</option>
+			  <option value="Trực tiếp khi nhận hàng">Directly when receiving goods</option>
+			  <option value="Qua thẻ ngân hàng">Via bank card</option>
 			</select>
 		  </div>
 		</form>

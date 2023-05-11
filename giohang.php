@@ -51,16 +51,17 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 				    <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel" >Nhập thông tin thanh toán</h5>
+				        <h5 class="modal-title" id="exampleModalLabel" >Enter payment information</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				    </div>
+					<!-- form thanh toan -->
 				    <form action="" onsubmit="return xacNhanThanhToan()">
 						<div class="modal-body" id="thongtinthanhtoan"></div>
 						<div class="modal-footer">
-				        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-				        	<button type="submit" class="btn btn-primary" id="btnXacNhan">Xác nhận</button>
+				        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				        	<button type="submit" class="btn btn-primary" id="btnXacNhan" style="background-color:#feb142">Confirm</button>
 				      	</div>
 				    </form>
 		    	</div>
