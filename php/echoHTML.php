@@ -449,30 +449,30 @@ function addChiTietSanPham()
                     <div>Delivery in 1 hour</div>
                 </div>
                 <div class="area_promo">
-                    <strong>khuyến mãi</strong>
+                    <strong>Promotion</strong>
                     <div class="promo">
                         <i class="fa fa-check-circle"></i>
-                        <div id="detailPromo"> </div>
+                        <div id="detailPromo" style = "display: none;"> </div>
                     </div>
                 </div>
                 <div class="policy">
                     <div>
                         <i class="fa fa-archive"></i>
-                        <p>Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Cây lấy sim, Ốp lưng </p>
+                        <p></p>
                     </div>
                     <div>
                         <i class="fa fa-star"></i>
-                        <p>Bảo hành chính hãng 12 tháng.</p>
+                        <p></p>
                     </div>
                     <div class="last">
                         <i class="fa fa-retweet"></i>
-                        <p>1 đổi 1 trong 1 tháng nếu lỗi, đổi sản phẩm tại nhà trong 1 ngày.</p>
+                        <p></p>
                     </div>
                 </div>
-                <div class="area_order">
+                <div class="area_order">    
                     <!-- nameProduct là biến toàn cục được khởi tạo giá trị trong phanTich_URL_chiTietSanPham -->
                     <a class="buy_now" onclick="themVaoGioHang(maProduct, nameProduct);">
-                        <h3><i class="fa fa-plus"></i> Add to cart</h3>
+                        <h3><i class="fa fa-plus"></i> ADD TO CART</h3>
                     </a>
                 </div>
             </div>
@@ -504,8 +504,8 @@ function addChiTietSanPham()
                         <label class="star star-1" for="star-1" title="Tệ"></label>
                     </form>
                 </div>
-                <textarea maxlength="250" id="inpBinhLuan" placeholder="Viết suy nghĩ của bạn vào đây..."></textarea>
-                <input id="btnBinhLuan" type="button" onclick="checkGuiBinhLuan()" value="GỬI BÌNH LUẬN">
+                <textarea maxlength="250" id="inpBinhLuan" placeholder="Leave your comment..."></textarea>
+                <input id="btnBinhLuan" type="button" onclick="checkGuiBinhLuan()" value="SEND">
             </div>
             <!-- <h2>Bình luận</h2> -->
             <div class="container-comment">

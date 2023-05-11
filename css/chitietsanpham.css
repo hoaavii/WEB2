@@ -11,6 +11,7 @@
     /* line-height: 40px; */
     /*tăng khoảng cách dòng*/
     font-family: "Cairo", sans-serif;
+    padding-bottom: 10px;
 }
 
 .rating {
@@ -70,7 +71,7 @@
     /*hối nội tuyến*/
     overflow: hidden;
     font-size: 24px;
-    color: #e10c00;
+    color: #e74a45;
     vertical-align: middle;
     /*thành phần sẽ đc canh giữa theo thành phần bao ngoài*/
     margin-right: 10px;
@@ -122,9 +123,9 @@
 }
 
 .ship {
-    background-color: #ecf7ed;
+    background-color: #ffefcd;
     border-radius: 3px;
-    border: 1px solid #c4ddc8;
+    border: 1px solid #feb142;
     margin: 5px 10px 10px;
     padding: 0 10px;
     font-weight: bold;
@@ -137,15 +138,16 @@
     margin: 4px 10px 0 0;
     float: left;
     font-size: 20px;
+    color: #feb142;
 }
 
 .ship div {
-    border-left: 1px solid #c4ddc8;
+    border-left: 1px solid #feb142;
     display: block;
     line-height: 30px;
     padding-left: 10px;
     margin-left: 28px;
-    color: #30a43b;
+    color: #feb142;
     max-width: 1200px;
 }
 
@@ -186,24 +188,29 @@
     display: block;
     overflow: hidden;
     margin: 10px;
+    border: black 1px solid;
 }
 
 .area_order .buy_now {
     display: block;
     overflow: hidden;
     padding: 7px 0;
-    border-radius: 4px;
     font-size: 16px;
     line-height: normal;
-    color: #fff;
+    color: black;
     text-align: center;
-    background: -webkit-linear-gradient(top, #f59000, #fd6e1d);
+    background-color: #fff;
     text-decoration: none;
     cursor: pointer;
 }
 
+.area_order:hover {
+    border: none;
+}
+
 .area_order .buy_now:hover {
-    background: -webkit-linear-gradient(top, #fd6e1d, #f59000);
+    background-color: #feb142;
+    color: #fff;
 }
 
 .area_order .buy_now h3 {
@@ -370,7 +377,7 @@
 /* ================== Binh luan ==================*/
 .guiBinhLuan {
     box-sizing: border-box;
-    border: 10px solid #252525;
+    border: 5px solid #ffefcd;
 }
 
 #inpBinhLuan {
@@ -386,17 +393,13 @@
     display: block;
     width: 100%;
     border: none;
-    background-color: #4CAF50;
+    background-color: #feb142;
     color: white;
     font-weight: bold;
     padding: 10px 28px;
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-}
-
-#btnBinhLuan:hover {
-    background-color: #4CBF50;
 }
 
 /*https://www.cssscript.com/simple-5-star-rating-system-with-css-and-html-radios/*/

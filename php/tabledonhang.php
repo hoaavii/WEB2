@@ -10,18 +10,22 @@
 
 		if(sizeof($dsdh) > 0) {
 			echo '<table class="table table-striped" >
-				<tr style="text-align:center;vertical-align:middle;font-size:20px;background-color:coral;color:black!important">
-				<th  style="font-weight:600">Mã đơn hàng</th>
-				<th  style="font-weight:600">Mã người dùng</th>
-				<th  style="font-weight:600">Ngày lập</th>
-				<th  style="font-weight:600">Người nhận</th>
-				<th  style="font-weight:600">SDT</th>
-				<th  style="font-weight:600">Địa chỉ</th>
-				<th  style="font-weight:600">Phương thức TT</th>
-				<th  style="font-weight:600">Tổng tiền</th>
-				<th  style="font-weight:600">Trạng thái</th>
-				<th  style="font-weight:600">Xem chi tiết</th>
-			</tr>';
+				<tr style="text-align:center;
+							vertical-align:middle;
+							font-size:20px;
+							background-color:coral;
+							color:black!important">
+					<th  style="font-weight:600">Mã đơn hàng</th>
+					<th  style="font-weight:600">Mã người dùng</th>
+					<th  style="font-weight:600">Ngày lập</th>
+					<th  style="font-weight:600">Người nhận</th>
+					<th  style="font-weight:600">SDT</th>
+					<th  style="font-weight:600">Địa chỉ</th>
+					<th  style="font-weight:600">Phương thức TT</th>
+					<th  style="font-weight:600">Tổng tiền</th>
+					<th  style="font-weight:600">Trạng thái</th>
+					<th  style="font-weight:600">Xem chi tiết</th>
+				</tr>';
 
 			forEach($dsdh as $row) {
 					echo '<tr>
