@@ -47,8 +47,8 @@
 
 		} else {
 			echo '<h2 style="color:green; text-align:center;">
-						Hiện chưa có đơn hàng nào, 
-						<a href="index.php" style="color:blue">Mua ngay</a>
+						No orders yet, 
+						<a href="index.php" style="color:blue">Shop now</a>
 					</h2>';
 		}
 	}
