@@ -5,6 +5,9 @@
 	if(!isset($_POST['request']) && !isset($_GET['request'])) die();
 
 	switch ($_POST['request']) {
+		$hoadonMaxID = $hoadonBUS->get_list("SELECT * FROM hoadon ORDER BY MaHD DESC LIMIT 0, 1");
+		$mahd = $hoadonMaxID[0]["MaHD"] ;
+
 		case 'themdonhang':
 			$dulieu = $_POST["dulieu"];
 
@@ -12,7 +15,7 @@
 			$chitiethdBUS = new ChiTietHoaDonBUS();
 
 			$hoadonBUS->add_new(array(
-				"MaHD" => "",
+				"MaHD" => $mahd,
 				"MaND" => $dulieu["maNguoiDung"],
 				"NgayLap" => $dulieu["ngayLap"],
 				"NguoiNhan" => $dulieu["tenNguoiNhan"],
@@ -23,8 +26,8 @@
 				"TrangThai" => 1
 			));
 
-			$hoadonMaxID = $hoadonBUS->get_list("SELECT * FROM hoadon ORDER BY MaHD DESC LIMIT 0, 1");
-			$mahd = $hoadonMaxID[0]["MaHD"];
+
+
 
 			forEach($dulieu["dssp"] as $sp) {
 				$dataSp = (new SanPhamBUS())->select_by_id("*", $sp["masp"]);

@@ -181,9 +181,9 @@ function thanhToan() {
     if (!listProduct.length) {
         Swal.fire({
             type: 'info',
-            title: "Rỗng",
+            title: "Empty",
             with: '500px',
-            text: 'Không có mặt hàng nào để thanh toán.'
+            text: 'There are no items to pay for.'
         });
         return;
     }
@@ -208,12 +208,13 @@ function thanhToan() {
 
         } else if (user.TrangThai == 0) {
             Swal.fire({
-                title: 'Tài Khoản Bị Khóa!',
-                text: 'Tài khoản của bạn hiện đang bị khóa nên không thể mua hàng!',
+                title: 'Account Locked!',
+                text: 'Your account is currently locked so you can\'t make purchases!',
                 type: 'error',
-                grow: 'row',
-                confirmButtonText: 'Trở về',
-                footer: '<a href>Liên hệ với Admin</a>'
+                with: '500px',
+                confirmButtonText: 'Return',
+                confirmButtonColor: '#feb142',
+                footer: '<a href>Contact with Admin</a>'
             });
         } else {
         	UserHienTai = user;  // biến toàn cục
@@ -255,8 +256,30 @@ function htmlThanhToan(userHienTai) {
 		</form>
 	 `);
 }
+Date.prototype.toMysqlFormat = function () {
+    var yyyy = this.getFullYear();
+    var mm = this.getMonth() + 1;
+    var dd = this.getDate();
+    var hh = this.getHours();
+    var mi = this.getMinutes();
+    var ss = this.getSeconds();
+
+    // `padStart(2, '0')` được sử dụng để đảm bảo rằng các giá trị ngày, tháng, giờ, phút và giây đều được 
+    // viết dưới dạng chuỗi có 2 ký tự, và nếu chiều dài chuỗi đang nhỏ hơn 2 ký tự, thì sẽ được thêm vào đầu 
+    // chuỗi các ký tự "0" để hoàn thành chiều dài 2 ký tự. 
+
+    return yyyy + '-' + mm.toString().padStart(2, '0')
+                 + '-' + dd.toString().padStart(2, '0')
+                 + ' ' + hh.toString().padStart(2, '0')
+                 + ':' + mi.toString().padStart(2, '0')
+                 + ':' + ss.toString().padStart(2, '0');
+};
+
+// Sử dụng phương thức mới để lấy thời gian hiện tại ở định dạng MySQL
 
 function xacNhanThanhToan() {
+    var ngayLap = new Date().toMysqlFormat();
+
 	var dulieu = {
 		maNguoiDung: UserHienTai.MaND,
 		tenNguoiNhan: $("#inputTen").val(),
@@ -265,7 +288,7 @@ function xacNhanThanhToan() {
 		phuongThucTT: $("#selectHinhThucTT").val(),
 		dssp: getListGioHang(),
 		tongTien: TotalPrice,
-		ngayLap: new Date().toMysqlFormat()
+		ngayLap: ngayLap
 	}
 
 	$.ajax({
@@ -288,18 +311,21 @@ function xacNhanThanhToan() {
 	return false;
 }
 
+  
+
 function xoaHet() {
     var listProduct = getListGioHang();
 
     if (listProduct.length) {
         Swal.fire({
-            title: 'Xóa Hết?',
-            text: 'Bạn có chắc muốn xóa hết sản phẩm trong giỏ! Việc này không thể được hoàn lại.',
+            title: 'Remove All?',
+            text: 'Are you sure you want to delete all the products in the cart! This cannot be refunded.',
             type: 'warning',
-            grow: 'row',
-            confirmButtonText: 'Tôi đồng ý',
-            cancelButtonText: 'Hủy',
-            showCancelButton: true
+            with: '600px',
+            confirmButtonText: 'Sure',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            confirmButtonColor: '#feb142'
 
         }).then((result) => {
             if (result.value) {
