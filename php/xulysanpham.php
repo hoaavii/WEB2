@@ -56,26 +56,70 @@
 
         //thêm
         case 'add':
-                $data = $_POST['dataAdd'];
-                $spAddArr = array(
-                    'MaSP' => $data['masp'],
-                    'MaLSP' => $data['company'],
-                    'TenSP' => $data['name'],
-                    'DonGia' => $data['price'],
-                    'SoLuong' => $data['amount'],
-                    'HinhAnh' => $data['img'],
-                    'MaKM' => $data['promo']['name'],
-                    'MoTa' => $data['detail']['describe'],
-                    'TrongLuong' => $data['detail']['weight'],
-                    'SoSao' => $data['star'],
-                    'SoDanhGia' => $data['rateCount'],
-                    'TrangThai' => $data['TrangThai']
-                );
+            $data = $_POST['dataAdd'];
+            $LSP=(new LoaiSanPhamBUS())->select_by_id('*', $data['category']);
+            if ($LSP['TenLSP']=='Vegatable')
+            {
+                $data['img']='img/vegetable/'.$data['img'];
+            }
+            else
+            {
+                $data['img']='img'.'/'.$LSP['TenLSP'].'s/'.$data['img'];
+            }
+            $spAddArr = array(
+                'MaSP' => $data['masp'],
+                'MaLSP' => $data['category'],
+                'TenSP' => $data['name'],
+                'DonGia' => $data['price'],
+                'SoLuong' => $data['amount'],
+                'HinhAnh' => $data['img'],
+                'MaKM' => $data['promoname'],
+                'MoTa' => $data['detail']['describe'],
+                'TrongLuong' => $data['detail']['weight'],
+                'SoSao' => $data['star'],
+                'SoDanhGia' => $data['rateCount'],
+                'TrangThai' => $data['TrangThai']
+            );
 
-                $spBUS = new SanPhamBUS();
-                die (json_encode($spBUS->add_new($spAddArr)));
-            break;
+            $spBUS = new SanPhamBUS();
+            die (json_encode($spBUS->add_new($spAddArr)));
 
+        break;
+    case 'change':
+        $data = $_POST['dataAdd'];
+        $LSP=(new LoaiSanPhamBUS())->select_by_id('*', $data['category']);
+        $Sp=(new SanPhamBUS())->select_by_id('*',$data['masp']);
+        if($data['img']==null)
+        {
+            $data['img']=$Sp['HinhAnh'];
+        }
+        else
+        {
+            if ($LSP['TenLSP']=='Vegatable')
+            {
+                $data['img']='img/vegetable/'.$data['img'];
+            }
+            else
+            {
+                $data['img']='img'.'/'.$LSP['TenLSP'].'s/'.$data['img'];
+            }
+        }
+        $spAddArr = array(
+            'MaLSP' => $data['category'],
+            'TenSP' => $data['name'],
+            'DonGia' => $data['price'],
+            'SoLuong' => $data['amount'],
+            'HinhAnh' => $data['img'],
+            'MaKM' => $data['promoname'],
+            'MoTa' => $data['detail']['describe'],
+            'TrongLuong' => $data['detail']['weight'],
+            'SoSao' => $data['star'],
+            'SoDanhGia' => $data['rateCount'],
+            'TrangThai' => $data['TrangThai']
+        );
+        $spBUS = new SanPhamBUS();
+        die(json_encode($spBUS->update_by_id($spAddArr,$data['masp'])));
+        break;
         // xóa
         case 'delete':
                 $spBUS = new SanPhamBUS();

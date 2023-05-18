@@ -56,11 +56,11 @@ function addThongKe() {
         // Chart data records -- each entry in this array corresponds to a point on
         // the chart.
         data: [
-          { year: '2008', value: 20 },
-          { year: '2009', value: 15 },
-          { year: '2010', value: 5 },
-          { year: '2011', value: 5 },
-          { year: '2012', value: 20 }
+            { year: '2008', value: 20 },
+            { year: '2009', value: 15 },
+            { year: '2010', value: 5 },
+            { year: '2011', value: 5 },
+            { year: '2012', value: 20 }
 
         ],
         // The name of the data record attribute that contains x-values.
@@ -70,7 +70,7 @@ function addThongKe() {
         // Labels for the ykeys -- will be displayed when you hover over the
         // chart.
         labels: ['Value']
-      });
+    });
     // var dataChart = {
     //     type: 'bar',
     //     data: {
@@ -152,6 +152,7 @@ function showLoaiSanPham(data) {
     document.getElementsByName("chonCompany")[0].innerHTML = s;
 }
 
+
 function ajaxKhuyenMai() {
     $.ajax({
         type: "POST",
@@ -174,10 +175,11 @@ function ajaxKhuyenMai() {
 function showKhuyenMai(data) {
     var s = `
         <option selected="selected" value="`+ data[0].MaKM + `">Không</option>
-        <option value="`+ data[1].MaKM + `">Săn sale</option>
-        <option value="`+ data[2].MaKM + `">Giảm giá</option>
-        <option value="`+ data[3].MaKM + `">Giá rẻ online</option>
-        <option value="`+ data[4].MaKM + `">Mởi nhập về</option>`;
+        <option value="`+ data[1].MaKM + `">Giảm giá</option>
+        <option value="`+ data[2].MaKM + `">Giá rẻ online</option>
+        <option value="`+ data[3].MaKM + `">Săn sale</option>
+        <option value="`+ data[4].MaKM + `">Mởi nhận về</option>`;
+    document.getElementsByName("chonKhuyenMai")[0].innerHTML = s;
     s = document.getElementsByName("chonKhuyenMai")[0].innerHTML;
 
 }
@@ -210,7 +212,6 @@ function showGTKM() {
             break;
     }
 }
-
 // ======================= Các Tab =========================
 function addEventChangeTab() {
     var sidebar = document.getElementsByClassName('sidebar')[0];
@@ -328,20 +329,25 @@ function timKiemSanPham(inp) {
 function layThongTinSanPhamTuTable(id) {
     var khung = document.getElementById(id);
     var tr = khung.getElementsByTagName('tr');
-
     var masp = tr[1].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var name = tr[2].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var category = tr[3].getElementsByTagName('td')[1].getElementsByTagName('select')[0].value;
-    var img = document.getElementById("hinhanh").value;
+    var img = tr[4].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
+    img = img.split("\\")
+    if (img.length > 1) {
+        img = img[2]
+    }
+    else {
+        img = null
+    }
+
     var price = tr[5].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var amount = tr[6].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var star = tr[7].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var rateCount = tr[8].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var promoName = tr[9].getElementsByTagName('td')[1].getElementsByTagName('select')[0].value;
-    var promoValue = tr[10].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-
-    var describe = tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var weight = tr[13].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
+    var describe = tr[11].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
+    var weight = tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
 
     return {
         "name": name,
@@ -351,13 +357,10 @@ function layThongTinSanPhamTuTable(id) {
         "amount": amount,
         "star": star,
         "rateCount": rateCount,
-        "promo": {
-            "name": promoName,
-            "value": promoValue
-        },
+        "promoname": promoName,
         "detail": {
             "describe": describe,
-            "weight": weight,
+            "weight": weight
         },
         "masp": masp,
         "TrangThai": 1
@@ -406,13 +409,8 @@ function themSanPham() {
             dataAdd: newSp
         },
         success: function (data, status, xhr) {
-            Swal.fire({
-                type: 'success',
-                title: 'Thêm thành công'
-            })
-            resetForm();
-            document.getElementById('khungThemSanPham').style.transform = 'scale(0)';
-            refreshTableSanPham();
+            alert('Thêm sản phẩm "' + newSp.name + '" thành công.')    
+            refreshTableSanPham(); 
         },
         error: function (e) {
             Swal.fire({
@@ -422,11 +420,6 @@ function themSanPham() {
             });
         }
     });
-
-
-
-    alert('Thêm sản phẩm "' + newSp.name + '" thành công.');
-    refreshTableSanPham();
 
 }
 function resetForm() {
@@ -500,8 +493,9 @@ function xoaSanPham(trangthai, masp, tensp) {
                     maspdelete: masp
                 },
                 success: function (data, status, xhr) {
-
+                    refreshTableSanPham();
                 },
+                
                 error: function () {
                     Swal.fire({
                         type: "error",
@@ -518,9 +512,59 @@ function xoaSanPham(trangthai, masp, tensp) {
 
 // Sửa
 function suaSanPham(masp) {
-    var Sp = layThongTinSanPhamTuTable('khungSuaSanPham');
-    console.log(Sp);
-    return false;
+    var newSp = layThongTinSanPhamTuTable('khungSuaSanPham');
+    console.log(newSp);
+    var pattCheckTenSP = /([a-z A-Z0-9&():.'_-]{2,})$/;
+    if (pattCheckTenSP.test(newSp.name) == false) {
+        alert("Tên sản phẩm không hợp lệ");
+        return false;
+    }
+
+    // //kt hình
+    // /*var pattCheckHinh= /^([0-9]{1,})[.](png|jpeg|jpg)$/;
+    // if (pattCheckHinh.test(newSp.img) == false)
+    // {
+    //     alert ("Ảnh không hợp lệ");
+    //     return false;
+    // }*/
+
+    //kt giá tiền
+    var pattCheckGia = /^([0-9]){1,}(000)$/;
+    if (pattCheckGia.test(newSp.price) == false) {
+        alert("Đơn giá sản phẩm không hợp lệ");
+        return false;
+    }
+
+    // //kt số lượng
+    var pattCheckSL = /[0-9]{1,}$/;
+    if (pattCheckSL.test(newSp.amount) == false) {
+        alert("Số lượng sản phẩm không hợp lệ");
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "php/xulysanpham.php",
+        dataType: "json",
+        // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+        data: {
+            request: "change",
+            dataAdd: newSp
+        },
+        success: function () {
+            alert('Sửa sản phẩm "' + newSp.name + '" thành công.')    
+            refreshTableSanPham();        
+        },
+        error: function (e) {
+            Swal.fire({
+                type: "error",
+                title: "Lỗi sửa sản phẩm",
+                html: e.responseText
+            });
+        }
+        
+    });
+    
 }
 
 function addKhungSuaSanPham(masp) {
@@ -542,7 +586,7 @@ function addKhungSuaSanPham(masp) {
                 <td><input disabled="disabled" type="text" id="maspSua" name="maspSua" value="` + sp.MaSP + `"></td>
             </tr>
             <tr>
-                <td>Tên sản phẩm:</td>
+                <td>Tên sẩn phẩm:</td>
                 <td><input type="text" value="` + sp.TenSP + `"></td>
             </tr>
             <tr>
@@ -550,15 +594,18 @@ function addKhungSuaSanPham(masp) {
                 <td>
                     <select name="chonCompany" onchange="autoMaSanPham(this.value)">`
 
-    var category = ["Vegetable", "Fruit", "Dryfruit"];
+
+    var company = ["DryFruit", "Vegetable", "Fruit",];
     var i = 1;
-    for (var c of category) {
+    for (var c of company) {
         var masp = i++;
         if (sp.MaLSP == masp)
             s += (`<option value="` + sp.MaLSP + `" selected="selected">` + c + `</option>`);
         else s += (`<option value="` + masp + `">` + c + `</option>`);
     }
     s += `</select>
+
+
                 </td>
             </tr>
             <?php
@@ -590,13 +637,17 @@ function addKhungSuaSanPham(masp) {
                             <td>
                                 <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
                                 <input type="file" name="hinhanh" onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem', '<?php echo $tenfilemoi; ?>')">
-                                <input style="display: none;" type="text" id="hinhanh" value="">
+                                // <input style="display: none;" type="text" id="hinhanh" value="">
                             </td>
                         </tr>
             <tr>
                 <td>Giá tiền:</td>
                 <td><input type="text" value="` + sp.DonGia + `"></td>
             </tr>
+            <tr>
+            <td>Số lượng:</td>
+            <td><input type="text"disabled="disabled" value="` + sp.SoLuong + `"></td>
+        </tr>
             <tr>
                 <td>Số sao:</td>
                 <td><input type="text" value="` + sp.SoSao + `"></td>
@@ -618,10 +669,6 @@ function addKhungSuaSanPham(masp) {
     s += `</script>
                     </select>
                 </td>
-            </tr>
-            <tr>
-                <td>Giá trị khuyến mãi:</td>
-                <td><input id="giatrikm" type="text" value="0"></td>
             </tr>
             <tr>
                 <th colspan="2">Chi tiết</th>
@@ -1060,136 +1107,135 @@ function openThemNguoiDung() {
     document.getElementsByClassName('tab-content')[0].style.display = 'block';
 }
 
-        // vô hiệu hóa người dùng (tạm dừng, không cho đăng nhập vào)
-        function voHieuHoaNguoiDung(TrangThai) {
-    if (TrangThai == 1)
-        {
+// vô hiệu hóa người dùng (tạm dừng, không cho đăng nhập vào)
+function voHieuHoaNguoiDung(TrangThai) {
+    if (TrangThai == 1) {
 
-        }
-        var span = inp.parentElement.nextElementSibling;
-        span.innerHTML = (inp.checked ? 'Khóa' : 'Mở');
+    }
+    var span = inp.parentElement.nextElementSibling;
+    span.innerHTML = (inp.checked ? 'Khóa' : 'Mở');
 }
 
-        // Xóa người dùng
-        function xoaNguoiDung(mand) {
-            Swal.fire({
-                title: "Bạn có chắc muốn xóa?",
-                type: "question",
-                showCancelButton: true,
-                cancelButtonText: "Hủy"
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        type: "POST",
-                        url: "php/xulykhachhang.php",
-                        dataType: "json",
-                        // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
-                        data: {
-                            request: "delete",
-                            mand: mand
-                        },
-                        success: function (data, status, xhr) {
-                            refreshTableKhachHang();
-                            //console.log(data);
-                        },
-                        error: function (e) {
-                            // Swal.fire({
-                            //     type: "error",
-                            //     title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
-                            //     html: e.responseText
-                            // });
-                            console.log(e.responseText);
-                        }
-                    });
+// Xóa người dùng
+function xoaNguoiDung(mand) {
+    Swal.fire({
+        title: "Bạn có chắc muốn xóa?",
+        type: "question",
+        showCancelButton: true,
+        cancelButtonText: "Hủy"
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: "POST",
+                url: "php/xulykhachhang.php",
+                dataType: "json",
+                // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+                data: {
+                    request: "delete",
+                    mand: mand
+                },
+                success: function (data, status, xhr) {
+                    refreshTableKhachHang();
+                    //console.log(data);
+                },
+                error: function (e) {
+                    // Swal.fire({
+                    //     type: "error",
+                    //     title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
+                    //     html: e.responseText
+                    // });
+                    console.log(e.responseText);
                 }
-            })
+            });
         }
+    })
+}
 
 // Sắp xếp
-        function sortKhachHangTable(loai) {
+function sortKhachHangTable(loai) {
     var list = document.getElementsByClassName('khachhang')[0].getElementsByClassName("table-content")[0];
-        var tr = list.getElementsByTagName('tr');
+    var tr = list.getElementsByTagName('tr');
 
-        quickSort(tr, 0, tr.length - 1, loai, getValueOfTypeInTable_KhachHang);
-        decrease = !decrease;
+    quickSort(tr, 0, tr.length - 1, loai, getValueOfTypeInTable_KhachHang);
+    decrease = !decrease;
 }
 
-        function getValueOfTypeInTable_KhachHang(tr, loai) {
+function getValueOfTypeInTable_KhachHang(tr, loai) {
     var td = tr.getElementsByTagName('td');
-        switch (loai) {
+    switch (loai) {
         case 'stt':
-        return Number(td[0].innerHTML);
+            return Number(td[0].innerHTML);
         case 'hoten':
-        return td[1].innerHTML.toLowerCase();
+            return td[1].innerHTML.toLowerCase();
         case 'email':
-        return td[2].innerHTML.toLowerCase();
+            return td[2].innerHTML.toLowerCase();
         case 'taikhoan':
-        return td[3].innerHTML.toLowerCase();
+            return td[3].innerHTML.toLowerCase();
         case 'matkhau':
-        return td[4].innerHTML.toLowerCase();
+            return td[4].innerHTML.toLowerCase();
     }
-        return false;
+    return false;
 }
 
-        // ================== Sort ====================
+// ================== Sort ====================
 
-        var decrease = true; // Sắp xếp giảm dần
+var decrease = true; // Sắp xếp giảm dần
 
-        // loại là tên cột, func là hàm giúp lấy giá trị từ cột loai
-        function quickSort(arr, left, right, loai, func) {
+// loại là tên cột, func là hàm giúp lấy giá trị từ cột loai
+function quickSort(arr, left, right, loai, func) {
     var pivot,
         partitionIndex;
 
-        if (left < right) {
-            pivot = right;
+    if (left < right) {
+        pivot = right;
         partitionIndex = partition(arr, pivot, left, right, loai, func);
 
         //sort left and right
         quickSort(arr, left, partitionIndex - 1, loai, func);
         quickSort(arr, partitionIndex + 1, right, loai, func);
     }
-        return arr;
+    return arr;
 }
 
-        function partition(arr, pivot, left, right, loai, func) {
+function partition(arr, pivot, left, right, loai, func) {
     var pivotValue = func(arr[pivot], loai),
         partitionIndex = left;
 
-        for (var i = left; i < right; i++) {
+    for (var i = left; i < right; i++) {
         if (decrease && func(arr[i], loai) > pivotValue ||
-        !decrease && func(arr[i], loai) < pivotValue) {
+            !decrease && func(arr[i], loai) < pivotValue) {
             swap(arr, i, partitionIndex);
-        partitionIndex++;
+            partitionIndex++;
         }
     }
-        swap(arr, right, partitionIndex);
-        return partitionIndex;
+    swap(arr, right, partitionIndex);
+    return partitionIndex;
 }
 
-        function swap(arr, i, j) {
+function swap(arr, i, j) {
     var tempi = arr[i].cloneNode(true);
-        var tempj = arr[j].cloneNode(true);
-        arr[i].parentNode.replaceChild(tempj, arr[i]);
-        arr[j].parentNode.replaceChild(tempi, arr[j]);
+    var tempj = arr[j].cloneNode(true);
+    arr[i].parentNode.replaceChild(tempj, arr[i]);
+    arr[j].parentNode.replaceChild(tempi, arr[j]);
 }
 
-        // ================= các hàm thêm ====================
-        // Chuyển khuyến mãi vễ dạng chuỗi tiếng việt
-        function promoToStringValue(pr) {
+// ================= các hàm thêm ====================
+// Chuyển khuyến mãi vễ dạng chuỗi tiếng việt
+function promoToStringValue(pr) {
     switch (pr.name) {
         case 'giamgia':
-        return 'Giảm ' + pr.value;
+            return 'Giảm ' + pr.value;
         case 'giareonline':
-        return 'Online (' + pr.value + ')';
+            return 'Online (' + pr.value + ')';
         case 'moiramat':
-        return 'Mới';
+            return 'Mới';
         case 'sansale':
-        return 'Săn sale';
+            return 'Săn sale';
     }
-        return '';
+    return '';
 }
 
-        function progress(percent, bg, width, height) {
+function progress(percent, bg, width, height) {
 
     return `<div class="progress" style="width: ` + width + `; height:` + height + `">
             <div class="progress-bar bg-info" style="width: ` + percent + `%; background-color:` + bg + `"></div>
