@@ -3,7 +3,7 @@ window.onload = function() {
     khoiTao();
 
     // thêm tags (từ khóa) vào khung tìm kiếm
-    var tags = ["Vegetable", "Dryfruit", "Fruit"];
+    var tags = ["Potato", "Mango", "Fruit"];
     for (var t of tags) addTags(t, "index.php?search=" + t)
 
     var listGioHang = getListGioHang();
@@ -99,7 +99,7 @@ function addProductToTable(listProduct) {
         s += `
 			<tr>
 				<td class="noPadding">
-					<a target="_blank" href="chitietsanpham.html?` + p.MaSP + `" title="Xem chi tiết">
+					<a target="_blank" href="chitietsanpham.php?` + p.MaSP + `" title="Xem chi tiết">
 						<img class="smallImg" src="` + p.HinhAnh + `">
 						<br>
 						` + p.TenSP + `
@@ -178,6 +178,7 @@ function xoaSanPhamTrongGioHang(masp, tensp) {
 
 function thanhToan() {
     var listProduct = getListGioHang();
+    
     if (!listProduct.length) {
         Swal.fire({
             type: 'info',
@@ -247,8 +248,8 @@ function htmlThanhToan(userHienTai) {
 		    <input class="form-control input-sm" id="inputDiaChi" required type="text" value="` + userHienTai.DiaChi + `">
 		  </div>
 		  <div class="form-group">
+          <label for="selectHinhThucTT">Payments</label>
 		    <select class="browser-default custom-select" id="selectHinhThucTT">
-		      <option value="" disabled selected>Payments</option>
 			  <option value="Trực tiếp khi nhận hàng">Directly when receiving goods</option>
 			  <option value="Qua thẻ ngân hàng">Via bank card</option>
 			</select>
@@ -303,11 +304,14 @@ function xacNhanThanhToan() {
 			capNhatMoiThu([]);
 		},
 		error: function(e) {
-			console.log(e.responseText)
+            console.log(e.responseText)
 		}
-
+        
 	})
 
+    //làm trống giỏ hàng sau khi đặt hàng
+    listProduct = [];
+    capNhatMoiThu(listProduct);
 	return false;
 }
 
