@@ -187,6 +187,14 @@ function checkDangKy() {
                     showTaiKhoan(false);
                 });
             }
+            if(kq == null){
+                Swal.fire({
+                    type: 'Error',
+                    title: 'Tài khoản đã tồn tại ',
+                    confirmButtonText: 'Quay lại'
+
+                });
+            }
         },
         error: function(e) {
             Swal.fire({
