@@ -11,7 +11,7 @@ window.onload = function() {
     // autocomplete(document.getElementById('search-box'), list_products);
 
     // thêm tags (từ khóa) vào khung tìm kiếm
-    var tags = ["Vegetable", "Dryfruit", "Fruit"];
+    var tags = ["Potato", "Mango", "Fruit"];
     for (var t of tags) addTags(t, "index.php?search=" + t);
 
     // =================== web 2 tìm nâng cao ================
@@ -26,9 +26,9 @@ window.onload = function() {
         type: "double",
         grid: true,
         min: 0,
-        max: 50,
+        max: 5,
         from: 0,
-        to: 50,
+        to: 5,
         step: 0.5,
         drag_interval: true,
         postfix: " triệu",
@@ -51,17 +51,17 @@ window.onload = function() {
     }
 
     // Thêm chọn mức giá
-    addPricesRange(0, 2000000);
-    addPricesRange(2000000, 4000000);
-    addPricesRange(4000000, 7000000);
-    addPricesRange(7000000, 13000000);
-    addPricesRange(13000000, 0);
+    addPricesRange(0, 200000);
+    addPricesRange(200000, 700000);
+    addPricesRange(700000, 1000000);
+    addPricesRange(1000000, 3000000);
+    addPricesRange(3000000, 0);
 
     // Thêm chọn khuyến mãi
     addPromotion('Nothing');
     addPromotion('giamgia');
-    addPromotion('tragop');
-    addPromotion('moiramat');
+    addPromotion('sansale');
+    addPromotion('moinhap');
     addPromotion('giareonline');
 
     // Thêm chọn số sao
@@ -98,7 +98,7 @@ function hienThiKhungSanPhamMacDinh() {
     addKhungSanPham('POPULAR', orange, ['star=0', 'sort=SoDanhGia-desc', 'page=0'], soLuong);
     //addKhungSanPham('NEW PRODUCT', orange, ['promo=moiramat', 'sort=SoDanhGia-desc', 'page=0'], soLuong);
     //addKhungSanPham('TRẢ GÓP 0%', yellow_red, ['promo=tragop', 'page=0'], soLuong);
-    //addKhungSanPham('DEAL ONLINE', orange, ['promo=giareonline', 'page=0'], soLuong);
+    addKhungSanPham('DEAL ONLINE', orange, ['promo=giareonline', 'page=0'], soLuong);
     addKhungSanPham('BIG SALE', orange, ['promo=giamgia', 'page=0'], soLuong);
     addKhungSanPham('CHEAP FOR ALL', orange, ['price=0-3000000', 'sort=DonGia-asc', 'page=0'], soLuong);
 }
@@ -176,7 +176,7 @@ function setupBanner() {
     });
 }
 
-// chọn hãng
+// chọn loại
 function setupCompany() {
     $.ajax({
         type: "POST",
@@ -573,14 +573,14 @@ function addAllChoosedFilter(filters) {
             var value = data[1];
 
             switch (type) {
-                case 'company':
+                case 'category':
                     var tenHang = "";
                     for (var c of DataCompany) {
                         if (c.MaLSP == value) {
                             tenHang = c.TenLSP;
                         }
                     }
-                    addChoosedFilter('company', "Hãng " + tenHang);
+                    addChoosedFilter('category', "Category " + tenHang);
                     break;
 
                 case 'search':
@@ -755,14 +755,14 @@ function priceToString(min, max) {
 // Chuyển khuyến mãi vễ dạng chuỗi tiếng việt
 function promoToString(name) {
     switch (name) {
-        case 'tragop':
-            return 'Trả góp';
+        case 'sansale':
+            return 'Săn sale';
         case 'giamgia':
             return 'Giảm giá';
         case 'giareonline':
-            return 'Giá rẻ online';
-        case 'moiramat':
-            return 'Mới ra mắt';
+            return 'Deal online';
+        case 'moinhap':
+            return 'Mới nhập về';
         case 'Nothing':
             return 'Không khuyến mãi';
     }
