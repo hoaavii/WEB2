@@ -79,7 +79,7 @@ function addThongKe() {
         },
         options: {
             title: {
-                fontColor: '#73818f',
+                fontColor: '#fff',
                 fontSize: 25,
                 display: true,
                 text: 'Sản phẩm bán ra'
@@ -158,7 +158,7 @@ function showKhuyenMai(data) {
         <option value="`+data[2].MaKM+`">Giảm giá</option>
         <option value="`+data[3].MaKM+`">Giá rẻ online</option>
         <option value="`+data[4].MaKM+`">Mởi ra mắt</option>`;
-    document.getElementsByName("chonKhuyenMai")[0].innerHTML = s;
+    s = document.getElementsByName("chonKhuyenMai")[0].innerHTML;
 
 }
 
@@ -548,7 +548,7 @@ function addKhungSuaSanPham(masp) {
                 <td><input type="text" value="` + sp.TenSP + `"></td>
             </tr>
             <tr>
-                <td>Hãng:</td>
+                <td>Category:</td>
                 <td>
                     <select name="chonCompany" onchange="autoMaSanPham(this.value)">`
 
