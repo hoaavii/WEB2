@@ -1,23 +1,23 @@
 var TONGTIEN = 0;
 
-window.onload = function() {
+window.onload = function () {
 
-    document.getElementById("btnDangXuat").onclick = function() {
-        checkDangXuat(()=>{
+    document.getElementById("btnDangXuat").onclick = function () {
+        checkDangXuat(() => {
             window.location.href = "login.php"
         });
     }
 
-    getCurrentUser((user)=>{
-        if(user != null && user.MaQuyen != 1) {
+    getCurrentUser((user) => {
+        if (user != null && user.MaQuyen != 1) {
             addEventChangeTab();
             addThongKe();
             openTab('Home');
         } else {
-            document.body.innerHTML = `<h1 style="color:red; with:100%; text-align:center; margin: 50px;"> Truy cập bị từ chối.. </h1>`;
+            document.body.innerHTML = `<h1 style="color:red; with:100%; text-align:center; margin: 50px;"> Access is denied.. </h1>`;
         }
-    }, (e)=> {
-        document.body.innerHTML = `<h1 style="color:red; with:100%; text-align:center; margin: 50px;"> Truy cập bị từ chối.. </h1>`;
+    }, (e) => {
+        document.body.innerHTML = `<h1 style="color:red; with:100%; text-align:center; margin: 50px;"> Access is denied.. </h1>`;
     });
 }
 
@@ -30,11 +30,11 @@ function refreshTableSanPham() {
         data: {
             request: "getall",
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             list_products = data; // biến toàn cục lưu trữ mảng sản phẩm hiện có
             addTableProducts(data);
         },
-        error: function(e) {
+        error: function (e) {
             Swal.fire({
                 type: "error",
                 title: "Lỗi lấy dữ liệu sản phẩm (admin.js > refreshTableSanPham)",
@@ -45,64 +45,84 @@ function refreshTableSanPham() {
     });
 }
 
-function addChart(id, chartOption) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var chart = new Chart(ctx, chartOption);
-}
-
+// function addChart(id, chartOption) {
+//     var ctx = document.getElementById(id).getContext('2d');
+//     var chart = new Chart(ctx, chartOption);
+// }
 function addThongKe() {
-    var dataChart = {
-        type: 'bar',
-        data: {
-            labels: ["Apple", "Samsung", "Xiaomi", "Vivo", "Oppo", "Mobiistar"],
-            datasets: [{
-                label: 'Số lượng bán ra',
-                data: [12, 19, 10, 5, 20, 5],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            title: {
-                fontColor: '#fff',
-                fontSize: 25,
-                display: true,
-                text: 'Sản phẩm bán ra'
-            }
-        }
-    };
+    new Morris.Line({
+        // ID of the element in which to draw the chart.
+        element: 'myfirstchart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        data: [
+          { year: '2008', value: 20 },
+          { year: '2009', value: 15 },
+          { year: '2010', value: 5 },
+          { year: '2011', value: 5 },
+          { year: '2012', value: 20 }
 
-    // Thêm thống kê
-    var barChart = copyObject(dataChart);
-    barChart.type = 'bar';
-    addChart('myChart1', barChart);
+        ],
+        // The name of the data record attribute that contains x-values.
+        xkey: 'year',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['value'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['Value']
+      });
+    // var dataChart = {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ["Vegetable", "Fruit", "Dryfruit"],
+    //         datasets: [{
+    //             label: 'Số lượng bán ra',
+    //             data: [62, 39, 20],
+    //             backgroundColor: [
+    //                 'rgba(255, 99, 132, 0.2)',
+    //                 'rgba(54, 162, 235, 0.2)',
+    //                 'rgba(255, 206, 86, 0.2)',
+    //                 'rgba(75, 192, 192, 0.2)',
+    //                 'rgba(153, 102, 255, 0.2)',
+    //                 'rgba(255, 159, 64, 0.2)'
+    //             ],
+    //             borderColor: [
+    //                 'rgba(255,99,132,1)',
+    //                 'rgba(54, 162, 235, 1)',
+    //                 'rgba(255, 206, 86, 1)',
+    //                 'rgba(75, 192, 192, 1)',
+    //                 'rgba(153, 102, 255, 1)',
+    //                 'rgba(255, 159, 64, 1)'
+    //             ],
+    //             borderWidth: 2
+    //         }]
+    //     },
+    //     options: {
+    //         title: {
+    //             fontColor: '#fff',
+    //             fontSize: 25,
+    //             display: true,
+    //             text: 'Sản phẩm bán ra'
+    //         }
+    //     }
+    // };
 
-    var doughnutChart = copyObject(dataChart);
-    doughnutChart.type = 'doughnut';
-    addChart('myChart2', doughnutChart);
+    // // Thêm thống kê
+    // var barChart = copyObject(dataChart);
+    // barChart.type = 'bar';
+    // addChart('myChart1', barChart);
 
-    var pieChart = copyObject(dataChart);
-    pieChart.type = 'pie';
-    addChart('myChart3', pieChart);
+    // var doughnutChart = copyObject(dataChart);
+    // doughnutChart.type = 'doughnut';
+    // addChart('myChart2', doughnutChart);
 
-    var lineChart = copyObject(dataChart);
-    lineChart.type = 'line';
-    addChart('myChart4', lineChart);
+    // var pieChart = copyObject(dataChart);
+    // pieChart.type = 'pie';
+    // addChart('myChart3', pieChart);
+
+    // var lineChart = copyObject(dataChart);
+    // lineChart.type = 'line';
+    // addChart('myChart4', lineChart);
 }
 
 function ajaxLoaiSanPham() {
@@ -114,21 +134,21 @@ function ajaxLoaiSanPham() {
         data: {
             request: "getall"
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             showLoaiSanPham(data);
         },
-        error: function(e) {
+        error: function (e) {
 
         }
     });
 }
 
 function showLoaiSanPham(data) {
-    var s="";
+    var s = "";
     for (var i = 0; i < data.length; i++) {
-            var p = data[i];
-                s +=`<option value="` + p.MaLSP + `">` + p.TenLSP + `</option>`;
-        }
+        var p = data[i];
+        s += `<option value="` + p.MaLSP + `">` + p.TenLSP + `</option>`;
+    }
     document.getElementsByName("chonCompany")[0].innerHTML = s;
 }
 
@@ -141,23 +161,23 @@ function ajaxKhuyenMai() {
         data: {
             request: "getall"
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             showKhuyenMai(data);
             showGTKM(data);
         },
-        error: function(e) {
+        error: function (e) {
 
         }
     });
 }
 
 function showKhuyenMai(data) {
-    var s=`
-        <option selected="selected" value="`+data[0].MaKM+`">Không</option>
-        <option value="`+data[1].MaKM+`">Trả góp</option>
-        <option value="`+data[2].MaKM+`">Giảm giá</option>
-        <option value="`+data[3].MaKM+`">Giá rẻ online</option>
-        <option value="`+data[4].MaKM+`">Mởi ra mắt</option>`;
+    var s = `
+        <option selected="selected" value="`+ data[0].MaKM + `">Không</option>
+        <option value="`+ data[1].MaKM + `">Săn sale</option>
+        <option value="`+ data[2].MaKM + `">Giảm giá</option>
+        <option value="`+ data[3].MaKM + `">Giá rẻ online</option>
+        <option value="`+ data[4].MaKM + `">Mởi nhập về</option>`;
     s = document.getElementsByName("chonKhuyenMai")[0].innerHTML;
 
 }
@@ -167,23 +187,23 @@ function showGTKM() {
     switch (giaTri) {
         // lấy tất cả khuyến mãi
         case '1':
-                document.getElementById("giatrikm").value = 0;
+            document.getElementById("giatrikm").value = 0;
             break;
 
         case '2':
-                document.getElementById("giatrikm").value = 500000;
+            document.getElementById("giatrikm").value = 25000;
             break;
 
         case '3':
-                document.getElementById("giatrikm").value = 650000;
+            document.getElementById("giatrikm").value = 10000;
             break;
 
         case '4':
-                document.getElementById("giatrikm").value = 0;
+            document.getElementById("giatrikm").value = 0;
             break;
 
         case '5':
-                document.getElementById("giatrikm").value = 0;
+            document.getElementById("giatrikm").value = 0;
             break;
 
         default:
@@ -197,7 +217,7 @@ function addEventChangeTab() {
     var list_a = sidebar.getElementsByTagName('a');
     for (var a of list_a) {
         if (!a.onclick) {
-            a.addEventListener('click', function() {
+            a.addEventListener('click', function () {
                 turnOff_Active();
                 this.classList.add('active');
                 var tab = this.childNodes[1].data.trim()
@@ -236,6 +256,9 @@ function openTab(nameTab) {
         case 'Khách Hàng':
             document.getElementsByClassName('khachhang')[0].style.display = 'block';
             break;
+        case 'Nhân Viên':
+            document.getElementsByClassName('nhanvien')[0].style.display = 'block';
+            break;
         case 'Thống Kê':
             document.getElementsByClassName('thongke')[0].style.display = 'block';
             break;
@@ -254,12 +277,12 @@ function addTableProducts(list_products) {
             <td style="width: 5%">` + (i + 1) + `</td>
             <td style="width: 10%">` + p.MaSP + `</td>
             <td style="width: 40%">
-                <a title="Xem chi tiết" target="_blank" href="chitietsanpham.php?` + p.TenSP.split(' ').join('-') + `">` + p.TenSP + `</a>
+                <a title="Xem chi tiết" target="_blank" href="chitietsanpham.php?` + p.MaSP.split(' ').join('-') + `">` + p.TenSP + `</a>
                 <img src="` + p.HinhAnh + `"></img>
             </td>
             <td style="width: 15%">` + parseInt(p.DonGia).toLocaleString() + `</td>
             <td style="width: 10%">` + /*promoToStringValue(*/ (p.KM.TenKM) /*)*/ + `</td>
-            <td style="width: 10%">` + (p.TrangThai==1?"Hiện":"Ẩn") + `</td>
+            <td style="width: 10%">` + (p.TrangThai == 1 ? "Hiện" : "Ẩn") + `</td>
             <td style="width: 10%">
                 <div class="tooltip">
                     <i class="fa fa-wrench" onclick="addKhungSuaSanPham('` + p.MaSP + `')"></i>
@@ -308,8 +331,8 @@ function layThongTinSanPhamTuTable(id) {
 
     var masp = tr[1].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var name = tr[2].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var company = tr[3].getElementsByTagName('td')[1].getElementsByTagName('select')[0].value;
-    var img =  document.getElementById("hinhanh").value;
+    var category = tr[3].getElementsByTagName('td')[1].getElementsByTagName('select')[0].value;
+    var img = document.getElementById("hinhanh").value;
     var price = tr[5].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var amount = tr[6].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
     var star = tr[7].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
@@ -317,21 +340,14 @@ function layThongTinSanPhamTuTable(id) {
     var promoName = tr[9].getElementsByTagName('td')[1].getElementsByTagName('select')[0].value;
     var promoValue = tr[10].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
 
-    var screen = tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var os = tr[13].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var camara = tr[14].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var camaraFront = tr[15].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var cpu = tr[16].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var ram = tr[17].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var rom = tr[18].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var microUSB = tr[19].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
-    var battery = tr[20].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
+    var describe = tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
+    var weight = tr[13].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value;
 
     return {
         "name": name,
         "img": img,
         "price": price,
-        "company": company,
+        "category": category,
         "amount": amount,
         "star": star,
         "rateCount": rateCount,
@@ -340,15 +356,8 @@ function layThongTinSanPhamTuTable(id) {
             "value": promoValue
         },
         "detail": {
-            "screen": screen,
-            "os": os,
-            "camara": camara,
-            "camaraFront": camaraFront,
-            "cpu": cpu,
-            "ram": ram,
-            "rom": rom,
-            "microUSB": microUSB,
-            "battery": battery
+            "describe": describe,
+            "weight": weight,
         },
         "masp": masp,
         "TrangThai": 1
@@ -360,9 +369,8 @@ function themSanPham() {
 
     //kt tên sp
     var pattCheckTenSP = /([a-z A-Z0-9&():.'_-]{2,})$/;
-    if (pattCheckTenSP.test(newSp.name) == false)
-    {
-        alert ("Tên sản phẩm không hợp lệ");
+    if (pattCheckTenSP.test(newSp.name) == false) {
+        alert("Tên sản phẩm không hợp lệ");
         return false;
     }
 
@@ -376,17 +384,15 @@ function themSanPham() {
 
     //kt giá tiền
     var pattCheckGia = /^([0-9]){1,}(000)$/;
-    if (pattCheckGia.test(newSp.price) == false)
-    {
-        alert ("Đơn giá sản phẩm không hợp lệ");
+    if (pattCheckGia.test(newSp.price) == false) {
+        alert("Đơn giá sản phẩm không hợp lệ");
         return false;
     }
 
     //kt số lượng
     var pattCheckSL = /[0-9]{1,}$/;
-    if (pattCheckSL.test(newSp.amount) == false)
-    {
-        alert ("Số lượng sản phẩm không hợp lệ");
+    if (pattCheckSL.test(newSp.amount) == false) {
+        alert("Số lượng sản phẩm không hợp lệ");
         return false;
     }
 
@@ -399,7 +405,7 @@ function themSanPham() {
             request: "add",
             dataAdd: newSp
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             Swal.fire({
                 type: 'success',
                 title: 'Thêm thành công'
@@ -408,7 +414,7 @@ function themSanPham() {
             document.getElementById('khungThemSanPham').style.transform = 'scale(0)';
             refreshTableSanPham();
         },
-        error: function(e) {
+        error: function (e) {
             Swal.fire({
                 type: "error",
                 title: "Lỗi add",
@@ -417,7 +423,7 @@ function themSanPham() {
         }
     });
 
-    
+
 
     alert('Thêm sản phẩm "' + newSp.name + '" thành công.');
     refreshTableSanPham();
@@ -432,34 +438,27 @@ function resetForm() {
     tr[5].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value = "";
     tr[6].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value = "0";
 
-    tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[13].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[14].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[15].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[16].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[17].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[18].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[19].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
-    tr[20].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value ="";
+    tr[12].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value = "";
+    tr[13].getElementsByTagName('td')[1].getElementsByTagName('input')[0].value = "";
+
 }
 
-function autoMaSanPham(company) {
+function autoMaSanPham(category) {
     // hàm tự tạo mã cho sản phẩm mới
-    var autoMaSP = list_products[list_products.length-1].MaSP;
-    document.getElementById('maspThem').value = parseInt(autoMaSP)+1;
+    var autoMaSP = list_products[list_products.length - 1].MaSP;
+    document.getElementById('maspThem').value = parseInt(autoMaSP) + 1;
 }
 
 // Xóa
 function xoaSanPham(trangthai, masp, tensp) {
-    if (trangthai == 1)
-    {
+    if (trangthai == 1) {
         // alert ("Sản phẩm còn đang bán");
         Swal.fire({
             type: 'warning',
             title: 'Bạn có muốn ẨN ' + tensp + ' không!',
             showCancelButton: true
         }).then((result) => {
-            if(result.value) {
+            if (result.value) {
                 $.ajax({
                     type: "POST",
                     url: "php/xulysanpham.php",
@@ -470,14 +469,14 @@ function xoaSanPham(trangthai, masp, tensp) {
                         id: masp,
                         trangthai: 0
                     },
-                    success: function(data, status, xhr) {
+                    success: function (data, status, xhr) {
                         Swal.fire({
                             type: 'success',
                             title: 'Ẩn thành công'
                         })
                         refreshTableSanPham();
                     },
-                    error: function(e) {
+                    error: function (e) {
                         Swal.fire({
                             type: "error",
                             title: "Lỗi xóa",
@@ -488,8 +487,7 @@ function xoaSanPham(trangthai, masp, tensp) {
             }
         })
     }
-    else
-    {
+    else {
         if (window.confirm('Bạn có chắc muốn xóa ' + tensp)) {
             // Xóa
             $.ajax({
@@ -501,10 +499,10 @@ function xoaSanPham(trangthai, masp, tensp) {
                     request: "delete",
                     maspdelete: masp
                 },
-                success: function(data, status, xhr) {
-                    
+                success: function (data, status, xhr) {
+
                 },
-                error: function() {
+                error: function () {
                     Swal.fire({
                         type: "error",
                         title: "Lỗi xóa"
@@ -544,7 +542,7 @@ function addKhungSuaSanPham(masp) {
                 <td><input disabled="disabled" type="text" id="maspSua" name="maspSua" value="` + sp.MaSP + `"></td>
             </tr>
             <tr>
-                <td>Tên sẩn phẩm:</td>
+                <td>Tên sản phẩm:</td>
                 <td><input type="text" value="` + sp.TenSP + `"></td>
             </tr>
             <tr>
@@ -552,15 +550,15 @@ function addKhungSuaSanPham(masp) {
                 <td>
                     <select name="chonCompany" onchange="autoMaSanPham(this.value)">`
 
-                    var company = ["Apple", "Coolpad", "HTC", "Itel", "Mobell", "Vivo", "Oppo", "SamSung", "Phillips", "Nokia", "Motorola", "Motorola", "Xiaomi"];
-                    var i = 1;
-                    for (var c of company) {
-                        var masp = i++;
-                        if (sp.MaLSP == masp)
-                            s += (`<option value="` + sp.MaLSP + `" selected="selected">` + c + `</option>`);
-                        else s += (`<option value="` + masp + `">` + c + `</option>`);
-                    }
-                    s+=`</select>
+    var category = ["Vegetable", "Fruit", "Dryfruit"];
+    var i = 1;
+    for (var c of category) {
+        var masp = i++;
+        if (sp.MaLSP == masp)
+            s += (`<option value="` + sp.MaLSP + `" selected="selected">` + c + `</option>`);
+        else s += (`<option value="` + masp + `">` + c + `</option>`);
+    }
+    s += `</select>
                 </td>
             </tr>
             <?php
@@ -611,13 +609,13 @@ function addKhungSuaSanPham(masp) {
                 <td>Khuyến mãi:</td>
                 <td>
                     <select name="chonKhuyenMai" onchange="showGTKM()">`
-                            var i = 1;
-                            s += (`<option selected="selected" value="` + i++ + `">Không</option>`);
-                            s += (`<option value="` + i++ + `">Giảm giá</option>`);
-                            s += (`<option value="` + i++ + `">Giá rẻ online</option>`);
-                            s += (`<option value="` + i++ + `">Trả góp</option>`);
-                            s += (`<option value="` + i++ + `">Mới ra mắt</option>`);
-                        s+=`</script>
+    var i = 1;
+    s += (`<option selected="selected" value="` + i++ + `">Không</option>`);
+    s += (`<option value="` + i++ + `">Giảm giá</option>`);
+    s += (`<option value="` + i++ + `">Giá rẻ online</option>`);
+    s += (`<option value="` + i++ + `">Săn sale</option>`);
+    s += (`<option value="` + i++ + `">Mới ra mắt</option>`);
+    s += `</script>
                     </select>
                 </td>
             </tr>
@@ -626,43 +624,15 @@ function addKhungSuaSanPham(masp) {
                 <td><input id="giatrikm" type="text" value="0"></td>
             </tr>
             <tr>
-                <th colspan="2">Thông số kĩ thuật</th>
+                <th colspan="2">Chi tiết</th>
             </tr>
             <tr>
-                <td>Màn hình:</td>
-                <td><input type="text" value="` + sp.ManHinh + `"></td>
+                <td>Mô tả:</td>
+                <td><input type="text" value="` + sp.MoTa + `"></td>
             </tr>
             <tr>
-                <td>Hệ điều hành:</td>
-                <td><input type="text" value="` + sp.HDH + `"></td>
-            </tr>
-            <tr>
-                <td>Camara sau:</td>
-                <td><input type="text" value="` + sp.CamSau + `"></td>
-            </tr>
-            <tr>
-                <td>Camara trước:</td>
-                <td><input type="text" value="` + sp.CamTruoc + `"></td>
-            </tr>
-            <tr>
-                <td>CPU:</td>
-                <td><input type="text" value="` + sp.CPU + `"></td>
-            </tr>
-            <tr>
-                <td>RAM:</td>
-                <td><input type="text" value="` + sp.Ram + `"></td>
-            </tr>
-            <tr>
-                <td>Bộ nhớ trong:</td>
-                <td><input type="text" value="` + sp.Rom + `"></td>
-            </tr>
-            <tr>
-                <td>Thẻ nhớ:</td>
-                <td><input type="text" value="` + sp.SDCard + `"></td>
-            </tr>
-            <tr>
-                <td>Dung lượng Pin:</td>
-                <td><input type="text" value="` + sp.Pin + `"></td>
+                <td>Trọng lượng:</td>
+                <td><input type="text" value="` + sp.TrongLuong + `"></td>
             </tr>
             <tr>
                 <td colspan="2"  class="table-footer"> <button name="submit">SỬA</button> </td>
@@ -722,11 +692,11 @@ function refreshTableDonHang() {
         data: {
             request: "getall",
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             addTableDonHang(data);
             console.log(data);
         },
-        error: function(e) {
+        error: function (e) {
             Swal.fire({
                 type: "error",
                 title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
@@ -746,7 +716,7 @@ function addTableDonHang(data) {
             <td style="width: 5%">` + (i + 1) + `</td>
             <td style="width: 13%">` + d.MaHD + `</td>
             <td style="width: 7%">` + d.MaND + `</td>
-            <td style="width: 20%">` + /*d.sp*/ + `</td>
+            <td style="width: 20%">` + d.sp + `</td>
             <td style="width: 15%">` + d.TongTien + `</td>
             <td style="width: 10%">` + d.NgayLap + `</td>
             <td style="width: 10%">` + d.TinhTrang + `</td>
@@ -762,7 +732,6 @@ function addTableDonHang(data) {
                 
             </td>
         </tr>`;
-        TONGTIEN += stringToNum(d.tongtien);
     }
 
     s += `</table>`;
@@ -923,11 +892,34 @@ function refreshTableKhachHang() {
         data: {
             request: "getall",
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             addTableKhachHang(data);
-            //console.log(data);
+            // console.log(data);
         },
-        error: function(e) {
+        error: function (e) {
+            Swal.fire({
+                type: "error",
+                title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
+                html: e.responseText
+            });
+        }
+    });
+}
+function refreshTableNhanVien() {
+    $.ajax({
+        type: "POST",
+        url: "php/xulykhachhang.php",
+        dataType: "json",
+        // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+        data: {
+            request: "getnhanvien",
+        },
+        success: function (data, status, xhr) {
+
+            addTableNhanVien(data);
+            console.log(data);
+        },
+        error: function (e) {
             Swal.fire({
                 type: "error",
                 title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
@@ -938,7 +930,7 @@ function refreshTableKhachHang() {
 }
 
 function thayDoiTrangThaiND(inp, mand) {
-    var trangthai = (inp.checked?1:0);  
+    var trangthai = (inp.checked ? 1 : 0);
     $.ajax({
         type: "POST",
         url: "php/xulykhachhang.php",
@@ -949,12 +941,12 @@ function thayDoiTrangThaiND(inp, mand) {
             key: mand,
             trangThai: trangthai
         },
-        success: function(data, status, xhr) {
+        success: function (data, status, xhr) {
             //list_products = data; // biến toàn cục lưu trữ mảng sản phẩm hiện có
             // refreshTableKhachHang();
             //console.log(data);
         },
-        error: function(e) {
+        error: function (e) {
             // Swal.fire({
             //     type: "error",
             //     title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
@@ -983,10 +975,10 @@ function addTableKhachHang(data) {
             <td >
                 <div class="tooltip">
                     <label class="switch">
-                        <input type="checkbox" `+(u.TrangThai==1?"checked":"")+` onclick="thayDoiTrangThaiND(this, '`+u.MaND+`')">
+                        <input type="checkbox" `+ (u.TrangThai == 1 ? "checked" : "") + ` onclick="thayDoiTrangThaiND(this, '` + u.MaND + `')">
                         <span class="slider round"></span>
                     </label>
-                    <span class="tooltiptext">` + (u.TrangThai ?    'Mở' : 'Khóa') + `</span>
+                    <span class="tooltiptext">` + (u.TrangThai ? 'Mở' : 'Khóa') + `</span>
                 </div>
                 <div class="tooltip">
                     <i class="fa fa-remove" onclick="xoaNguoiDung('` + u.MaND + `')"></i>
@@ -997,9 +989,45 @@ function addTableKhachHang(data) {
     }
 
     s += `</table>`;
-    tc.innerHTML = s;
-}
 
+    tc.innerHTML = s;
+    console.log(tc);
+}
+function addTableNhanVien(data) {
+    var tc = document.getElementsByClassName('nhanvien')[0].getElementsByClassName('table-content')[0];
+    var s = `<table class="table-outline hideImg">`;
+
+
+    for (var i = 0; i < data.length; i++) {
+        var u = data[i];
+        console.log(u.TrangThai)
+
+        s += `<tr>
+            <td >` + (i + 1) + `</td>
+            <td >` + u.Ho + ' ' + u.Ten + `</td>
+            <td >` + u.Email + `</td>
+            <td >` + u.TaiKhoan + `</td>           
+            <td >
+                <div class="tooltip">
+                    <label class="switch">
+                        <input type="checkbox" `+ (u.TrangThai == 1 ? "checked" : "") + ` onclick="thayDoiTrangThaiND(this, '` + u.MaND + `')">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="tooltiptext">` + (u.TrangThai ? 'Mở' : 'Khóa') + `</span>
+                </div>
+                <div class="tooltip">
+                    <i class="fa fa-remove" onclick="xoaNguoiDung('` + u.MaND + `')"></i>
+                    <span class="tooltiptext">Xóa</span>
+                </div>
+            </td>
+        </tr>`;
+    }
+
+    s += `</table>`;
+
+    tc.innerHTML = s;
+    console.log(tc);
+}
 // Tìm kiếm
 function timKiemNguoiDung(inp) {
     var kieuTim = document.getElementsByName('kieuTimKhachHang')[0].value;
@@ -1025,143 +1053,147 @@ function timKiemNguoiDung(inp) {
 }
 
 function openThemNguoiDung() {
-    window.alert('Not Available!');
-}
-
-// vô hiệu hóa người dùng (tạm dừng, không cho đăng nhập vào)
-function voHieuHoaNguoiDung(TrangThai) {
-    if (TrangThai == 1)
-    {
-
+    var main = document.getElementsByClassName('main')[0].children;
+    for (var e of main) {
+        e.style.display = 'none';
     }
-    var span = inp.parentElement.nextElementSibling;
-    span.innerHTML = (inp.checked ? 'Khóa' : 'Mở');
+    document.getElementsByClassName('tab-content')[0].style.display = 'block';
 }
 
-// Xóa người dùng
-function xoaNguoiDung(mand) { 
-    Swal.fire({
-        title: "Bạn có chắc muốn xóa?",
-        type: "question",
-        showCancelButton: true,
-        cancelButtonText: "Hủy"
-    }).then((result)=>{
-        if(result.value) {
-            $.ajax({
-                type: "POST",
-                url: "php/xulykhachhang.php",
-                dataType: "json",
-                // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
-                data: {
-                    request: "delete",
-                    mand: mand
-                },
-                success: function(data, status, xhr) {
-                    refreshTableKhachHang();
-                    //console.log(data);
-                },
-                error: function(e) {
-                    // Swal.fire({
-                    //     type: "error",
-                    //     title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
-                    //     html: e.responseText
-                    // });
-                    console.log(e.responseText);
-                }
-            });
+        // vô hiệu hóa người dùng (tạm dừng, không cho đăng nhập vào)
+        function voHieuHoaNguoiDung(TrangThai) {
+    if (TrangThai == 1)
+        {
+
         }
-    })
+        var span = inp.parentElement.nextElementSibling;
+        span.innerHTML = (inp.checked ? 'Khóa' : 'Mở');
 }
+
+        // Xóa người dùng
+        function xoaNguoiDung(mand) {
+            Swal.fire({
+                title: "Bạn có chắc muốn xóa?",
+                type: "question",
+                showCancelButton: true,
+                cancelButtonText: "Hủy"
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "php/xulykhachhang.php",
+                        dataType: "json",
+                        // timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+                        data: {
+                            request: "delete",
+                            mand: mand
+                        },
+                        success: function (data, status, xhr) {
+                            refreshTableKhachHang();
+                            //console.log(data);
+                        },
+                        error: function (e) {
+                            // Swal.fire({
+                            //     type: "error",
+                            //     title: "Lỗi lấy dữ liệu khách Hàng (admin.js > refreshTableKhachHang)",
+                            //     html: e.responseText
+                            // });
+                            console.log(e.responseText);
+                        }
+                    });
+                }
+            })
+        }
 
 // Sắp xếp
-function sortKhachHangTable(loai) {
+        function sortKhachHangTable(loai) {
     var list = document.getElementsByClassName('khachhang')[0].getElementsByClassName("table-content")[0];
-    var tr = list.getElementsByTagName('tr');
+        var tr = list.getElementsByTagName('tr');
 
-    quickSort(tr, 0, tr.length - 1, loai, getValueOfTypeInTable_KhachHang);
-    decrease = !decrease;
+        quickSort(tr, 0, tr.length - 1, loai, getValueOfTypeInTable_KhachHang);
+        decrease = !decrease;
 }
 
-function getValueOfTypeInTable_KhachHang(tr, loai) {
+        function getValueOfTypeInTable_KhachHang(tr, loai) {
     var td = tr.getElementsByTagName('td');
-    switch (loai) {
+        switch (loai) {
         case 'stt':
-            return Number(td[0].innerHTML);
+        return Number(td[0].innerHTML);
         case 'hoten':
-            return td[1].innerHTML.toLowerCase();
+        return td[1].innerHTML.toLowerCase();
         case 'email':
-            return td[2].innerHTML.toLowerCase();
+        return td[2].innerHTML.toLowerCase();
         case 'taikhoan':
-            return td[3].innerHTML.toLowerCase();
+        return td[3].innerHTML.toLowerCase();
         case 'matkhau':
-            return td[4].innerHTML.toLowerCase();
+        return td[4].innerHTML.toLowerCase();
     }
-    return false;
+        return false;
 }
 
-// ================== Sort ====================
-// https://github.com/HoangTran0410/First_html_css_js/blob/master/sketch.js
-var decrease = true; // Sắp xếp giảm dần
+        // ================== Sort ====================
 
-// loại là tên cột, func là hàm giúp lấy giá trị từ cột loai
-function quickSort(arr, left, right, loai, func) {
+        var decrease = true; // Sắp xếp giảm dần
+
+        // loại là tên cột, func là hàm giúp lấy giá trị từ cột loai
+        function quickSort(arr, left, right, loai, func) {
     var pivot,
         partitionIndex;
 
-    if (left < right) {
-        pivot = right;
+        if (left < right) {
+            pivot = right;
         partitionIndex = partition(arr, pivot, left, right, loai, func);
 
         //sort left and right
         quickSort(arr, left, partitionIndex - 1, loai, func);
         quickSort(arr, partitionIndex + 1, right, loai, func);
     }
-    return arr;
+        return arr;
 }
 
-function partition(arr, pivot, left, right, loai, func) {
+        function partition(arr, pivot, left, right, loai, func) {
     var pivotValue = func(arr[pivot], loai),
         partitionIndex = left;
 
-    for (var i = left; i < right; i++) {
+        for (var i = left; i < right; i++) {
         if (decrease && func(arr[i], loai) > pivotValue ||
-            !decrease && func(arr[i], loai) < pivotValue) {
+        !decrease && func(arr[i], loai) < pivotValue) {
             swap(arr, i, partitionIndex);
-            partitionIndex++;
+        partitionIndex++;
         }
     }
-    swap(arr, right, partitionIndex);
-    return partitionIndex;
+        swap(arr, right, partitionIndex);
+        return partitionIndex;
 }
 
-function swap(arr, i, j) {
+        function swap(arr, i, j) {
     var tempi = arr[i].cloneNode(true);
-    var tempj = arr[j].cloneNode(true);
-    arr[i].parentNode.replaceChild(tempj, arr[i]);
-    arr[j].parentNode.replaceChild(tempi, arr[j]);
+        var tempj = arr[j].cloneNode(true);
+        arr[i].parentNode.replaceChild(tempj, arr[i]);
+        arr[j].parentNode.replaceChild(tempi, arr[j]);
 }
 
-// ================= các hàm thêm ====================
-// Chuyển khuyến mãi vễ dạng chuỗi tiếng việt
-function promoToStringValue(pr) {
+        // ================= các hàm thêm ====================
+        // Chuyển khuyến mãi vễ dạng chuỗi tiếng việt
+        function promoToStringValue(pr) {
     switch (pr.name) {
-        case 'tragop':
-            return 'Góp ' + pr.value + '%';
         case 'giamgia':
-            return 'Giảm ' + pr.value;
+        return 'Giảm ' + pr.value;
         case 'giareonline':
-            return 'Online (' + pr.value + ')';
+        return 'Online (' + pr.value + ')';
         case 'moiramat':
-            return 'Mới';
+        return 'Mới';
+        case 'sansale':
+        return 'Săn sale';
     }
-    return '';
+        return '';
 }
 
-function progress(percent, bg, width, height) {
+        function progress(percent, bg, width, height) {
 
     return `<div class="progress" style="width: ` + width + `; height:` + height + `">
-                <div class="progress-bar bg-info" style="width: ` + percent + `%; background-color:` + bg + `"></div>
-            </div>`
+            <div class="progress-bar bg-info" style="width: ` + percent + `%; background-color:` + bg + `"></div>
+        </div>`
 }
 
 // for(var i = 0; i < list_products.length; i++) {
