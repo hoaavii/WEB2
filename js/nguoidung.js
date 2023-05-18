@@ -6,7 +6,7 @@ window.onload = function () {
     khoiTao();
 
     // thêm tags (từ khóa) vào khung tìm kiếm
-    var tags = ["Vegetable", "Dryfruit", "Fruit"];
+    var tags = ["Potato", "Mango", "Fruit"];
     for (var t of tags) addTags(t, "index.php?search=" + t);
 
     getCurrentUser((data) => {
