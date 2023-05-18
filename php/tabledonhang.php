@@ -15,7 +15,8 @@
 							font-size:20px;
 							background-color:coral;
 							color:black!important">
-					<th  style="font-weight:600">Mã đơn hàng</th>
+					<th  style="font-weight:600">
+					</th>
 					<th  style="font-weight:600">Mã người dùng</th>
 					<th  style="font-weight:600">Ngày lập</th>
 					<th  style="font-weight:600">Người nhận</th>
@@ -39,16 +40,18 @@
 						<td  style="text-align:center;vertical-align:middle;">'.$row["TongTien"].'</td>
 						<td  style="text-align:center;vertical-align:middle;">'.$row["TrangThai"].'</td>
 						<td  style="text-align:center;vertical-align:middle;">
+
 							<button data-toggle="modal" data-target="#exampleModal" onclick="xemChiTiet(\''.$row["MaHD"].'\')">Xem</button>
+
 						</td>
 					</tr>'	;	
 			}
 			echo '</table>';
 
 		} else {
-			echo '<h2 style="color:green; text-align:center;">
+			echo '<h2 style="color:#feb142; text-align:center;">
 						No orders yet, 
-						<a href="index.php" style="color:blue">Shop now</a>
+						<a href="index.php" style="color:gray">Shop now</a>
 					</h2>';
 		}
 	}
