@@ -68,7 +68,7 @@ function addHeader()
                 <div class="cart">
                     <a href="giohang.php">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>Giỏ hàng</span>
+                        <span>Cart</span>
                         <span class="cart-number"></span>
                     </a>
                 </div> <!-- End Cart -->
@@ -361,7 +361,7 @@ function addHome()
 
     <div class="companysFilter">
         <button class="companysButton" onclick="setCompanysMenu()">
-            <p>Hãng</p>
+            <p>Category</p>
             <div id="iconOpenMenu">▷</div>
             <div id="iconCloseMenu" style="display: none;">▽</div>
         </button>
