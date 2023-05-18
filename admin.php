@@ -20,7 +20,10 @@
 
     <!-- Jquery -->
     <script src="lib/Jquery/Jquery.min.js"></script>
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <!-- Our files -->
     <link rel="stylesheet" href="css/admin/style.css">
     <link rel="stylesheet" href="css/admin/progress.css">
@@ -145,7 +148,7 @@
                             <td><input type="text"></td>
                         </tr>
                         <tr>
-                            <td>Hãng:</td>
+                            <td>Loại:</td>
                             <td>
                                 <select name="chonCompany" onchange="autoMaSanPham(this.value)">
                                     <script>
@@ -217,42 +220,14 @@
                             <td><input id="giatrikm" type="text"></td>
                         </tr>
                         <tr>
-                            <th colspan="2">Thông số kĩ thuật</th>
+                            <th colspan="2">Chi tiết:</th>
                         </tr>
                         <tr>
-                            <td>Màn hình:</td>
+                            <td>Mô tả:</td>
                             <td><input type="text"></td>
                         </tr>
                         <tr>
-                            <td>Hệ điều hành:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Camara sau:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Camara trước:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>CPU:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>RAM:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Bộ nhớ trong:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Thẻ nhớ:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Dung lượng Pin:</td>
+                            <td>Trọng lượng:</td>
                             <td><input type="text"></td>
                         </tr>
                         <tr>
@@ -334,7 +309,9 @@
 
         <!-- Thống kê -->
         <div class="thongke">
-            <div class="canvasContainer">
+            <p>Thống kê đơn hàng theo: </p>
+            <div class="myChart" id="myfirstchart" style="height: 250px; width: 500px; margin:0px 300px;"></div>
+            <!-- <div class="canvasContainer">
                 <canvas id="myChart1"></canvas>
             </div>
 
@@ -348,12 +325,33 @@
 
             <div class="canvasContainer">
                 <canvas id="myChart4"></canvas>
-            </div>
+            </div> -->
 
         </div>
     </div> <!-- // main -->
 
-
+    <!-- <script type="text/javascript">
+        new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'myfirstchart',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  data: [
+    { year: '2008', value: 20 },
+    { year: '2009', value: 10 },
+    { year: '2010', value: 5 },
+    { year: '2011', value: 5 },
+    { year: '2012', value: 20 }
+  ],
+  // The name of the data record attribute that contains x-values.
+  xkey: 'year',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Value']
+});
+    </script> -->
     <footer>
 
     </footer>
