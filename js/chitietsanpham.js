@@ -6,7 +6,7 @@ window.onload = function() {
     khoiTao();
 
     // thêm tags (từ khóa) vào khung tìm kiếm
-    var tags = ["Vegetable", "Dryfruit", "Fruit"];
+    var tags = ["Potato", "Mango", "Fruit"];
     for (var t of tags) addTags(t, "index.php?search=" + t, true);
 
     phanTichURL_Web2();
@@ -87,15 +87,8 @@ function addChiTietToWeb(p) {
     // Cập nhật thông số
     var info = document.getElementsByClassName('info')[0];
     var s = "";
-    // var s = addThongSo('Màn hình', p.ManHinh);
-    // s += addThongSo('Hệ điều hành', p.HDH);
-    // s += addThongSo('Camara sau', p.CamSau);
-    // s += addThongSo('Camara trước', p.CamTruoc);
-    // s += addThongSo('CPU', p.CPU);
-    // s += addThongSo('RAM', p.Ram);
-    // s += addThongSo('Bộ nhớ trong', p.Rom);
-    // s += addThongSo('Thẻ nhớ', p.SDCard);
-    // s += addThongSo('Dung lượng pin', p.Pin);
+    var s = addThongSo('Mô tả', p.MoTa);
+    s += addThongSo('Trọng lượng', p.TrongLuong);
     info.innerHTML = s;
 
     // Cập nhật hình
@@ -227,24 +220,24 @@ function getRateStar(num) {
 function getDetailPromo(sp) {
     switch (sp.KM.LoaiKM) {
         case 'tragop':
-            var span = `<span style="font-weight: bold"> lãi suất ` + sp.KM.GiaTriKM + `% </span>`;
-            return `Khách hàng có thể mua trả góp sản phẩm với ` + span + `với thời hạn 6 tháng kể từ khi mua hàng.`;
+            var span = `<span style="font-weight: bold"> săn sale ` + sp.KM.GiaTriKM + `% </span>`;
+            return `Sản phẩm được hỗ trợ giá giảm ` + span ;
 
         case 'giamgia':
             var span = `<span style="font-weight: bold">` + Number(sp.KM.GiaTriKM).toLocaleString() + `</span>`;
             return `Khách hàng sẽ được giảm ` + span + `₫ khi tới mua trực tiếp tại cửa hàng`;
 
-        case 'moiramat':
-            return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`;
+        case 'moinhap':
+            return `Những loại trái cây rau củ được nhập về để phục vụ khách hàng`;
 
         case 'giareonline':
             var del = Number(p.DonGia) - Number(p.KM.GiaTriKM);
             var span = `<span style="font-weight: bold">` + numToString(del) + `</span>`;
-            return `Sản phẩm sẽ được giảm ` + span + `₫ khi mua hàng online bằng thẻ VPBank hoặc tin nhắn SMS`;
+            return `Sản phẩm sẽ được giảm ` + span + `₫ khi mua hàng online`;
 
         default:
-            var span = `<span style="font-weight: bold">61 xe Wave Alpha</span>`;
-            return `Cơ hội trúng ` + span + ` khi trả góp Home Credit`;
+            var span = `<span style="font-weight: bold">Free shipping</span>`;
+            return `Đơn hàng sẽ được ` + span + ` khi mua trong hôm nay`;
     }
 }
 
