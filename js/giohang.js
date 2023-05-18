@@ -115,7 +115,7 @@ function addProductToTable(listProduct) {
 				<td class="noPadding"> 
 					<i class="fa fa-trash" onclick="xoaSanPhamTrongGioHang(` + masp + ",'" + p.TenSP + `')"></i> 
 				</td>
-			</tr>
+		</tr>
 		`;
         // Chú ý nháy cho đúng ở giamsoluong, tangsoluong
         totalPrice += thanhtien;

@@ -59,7 +59,8 @@
 				    </div>
 				<div class="modal-body" id="chitietdonhang"></div>
 				<div class="modal-footer">
-		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+					<button type="summit" class="btn btn-primary" id="btnXacNhanHuy" style="background-color:#feb142">Cancel Order</button>
+		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		        	<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 		      	</div>
 		    	</div>
