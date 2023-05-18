@@ -70,7 +70,7 @@ function animateCartNumber() {
     setTimeout(function() {
         cn.style.transform = 'scale(1)';
         cn.style.backgroundColor = 'transparent';
-        cn.style.color = 'red';
+        cn.style.color = '#feb142';
     }, 1200);
 }
 
@@ -323,16 +323,16 @@ function promoToWeb(name, value) { // khuyen mai
             contentLabel = `<i class="fa fa-bolt"></i> Giảm ` + value.toLocaleString() + `&#8363;`;
             break;
 
-        case "TraGop":
-            contentLabel = `Trả góp ` + value.toLocaleString() + `%`;
+        case "SanSale":
+            contentLabel = `TSăn sale ` + value.toLocaleString() + `%`;
             break;
 
         case "GiaReOnline":
             contentLabel = `Giá rẻ online`;
             break;
 
-        case "MoiRaMat":
-            contentLabel = "Mới ra mắt";
+        case "MoiNhap":
+            contentLabel = "Mới nhập về";
             break;
     }
 
@@ -660,7 +660,7 @@ function auto_Get_Database() {
     }
 }
 
-function getThongTinSanPhamFrom_TheGioiDiDong() {
+function getThongTinSanPhamFrom() {
     javascript: (function() {
         var s = document.createElement('script');
         s.innerHTML = `
@@ -675,32 +675,11 @@ function getThongTinSanPhamFrom_TheGioiDiDong() {
 					var giatri = li.getElementsByTagName('div')[0].innerText;
 	
 					switch (loai) {
-						case "Màn hình:":
-							result.detail.screen = giatri.replace('"', "'");
+						case "Mô tả":
+							result.detail.descirbe = giatri;
 							break;
-						case "Hệ điều hành:":
-							result.detail.os = giatri;
-							break;
-						case "Camera sau:":
-							result.detail.camara = giatri;
-							break;
-						case "Camera trước:":
-							result.detail.camaraFront = giatri;
-							break;
-						case "CPU:":
-							result.detail.cpu = giatri;
-							break;
-						case "RAM:":
-							result.detail.ram = giatri;
-							break;
-						case "Bộ nhớ trong:":
-							result.detail.rom = giatri;
-							break;
-						case "Thẻ nhớ:":
-							result.detail.microUSB = giatri;
-							break;
-						case "Dung lượng pin:":
-							result.detail.battery = giatri;
+						case "Trọng lượng":
+							result.detail.weight = giatri;
 							break;
 					}
 				}
