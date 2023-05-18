@@ -180,7 +180,8 @@ function checkDangKy() {
                     type: 'success',
                     title: 'Sign Up Success' + kq.TaiKhoan,
                     text: 'You will be logged in automatically',
-                    confirmButtonText: 'Great'
+                    confirmButtonText: 'Great',
+                    confirmButtonColor: '#feb142'
 
                 }).then((result) => {
                     capNhatThongTinUser();
@@ -190,8 +191,9 @@ function checkDangKy() {
             if(kq == null){
                 Swal.fire({
                     type: 'Error',
-                    title: 'Tài khoản đã tồn tại ',
-                    confirmButtonText: 'Quay lại'
+                    title: 'Account already exists ',
+                    confirmButtonText: 'Turn back',
+                    confirmButtonColor: '#feb142'
 
                 });
             }
@@ -236,8 +238,8 @@ function checkaddadmin() {
             if(kq != null) {
                 Swal.fire({
                     type: 'success',
-                    title: 'Đăng kí thành công ',
-                    confirmButtonText: 'Tuyệt'
+                    title: 'Sign Up Success!',
+                    confirmButtonText: false
 
                 });
             }
@@ -253,7 +255,7 @@ function checkaddadmin() {
         error: function(e) {
             Swal.fire({
                 type: "error",
-                title: "Lỗi",
+                title: "Error",
                 // html: e.responseText
             });
             console.log(e.responseText)

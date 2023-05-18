@@ -131,10 +131,10 @@ function addProductToTable(listProduct) {
 			</tr>
 			<tr>
 				<td colspan="5">
-					<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="thanhToan()">
+					<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="background-color:#feb142;border-color:none" onclick="thanhToan()">
 						<i class="fa fa-usd"></i> Pay
 					</button> 
-					<button class="btn btn-danger" onclick="xoaHet()">
+					<button class="btn btn-danger" onclick="xoaHet()"  >
 						<i class="fa fa-trash-o"></i>Remove all
 					</button>
 				</td>

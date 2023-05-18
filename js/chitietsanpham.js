@@ -104,12 +104,13 @@ function checkGuiBinhLuan() {
     getCurrentUser((user) => {
         if(user == null) {
             Swal.fire({
-                title: 'Xin chào!',
-                text: 'Bạn cần đăng nhập để binh luận',
+                title: 'Hi!',
+                text: 'You need to be logged in to comment',
                 type: 'error',
-                grow: 'row',
-                confirmButtonText: 'Đăng nhập',
-                cancelButtonText: 'Trở về',
+                width : '250px',
+                confirmButtonText: 'Login',
+                cancelButtonText: 'Return',
+                confirmButtonColor : '#feb142',
                 showCancelButton: true
             }).then((result) => {
                 if (result.value) {
@@ -122,10 +123,11 @@ function checkGuiBinhLuan() {
 
     }, (error) => {
         Swal.fire({
-            title: 'Lỗi!',
-            text: 'Có lỗi khi đăng đánh giá',
+            title: 'Error!',
+            text: 'There was an error posting the review',
             type: 'error',
-            grow: 'row'
+            width : '250px'
+            
         })
     })
 }
@@ -136,20 +138,18 @@ function guiBinhLuan(nguoidung) {
 
     if(!soSao) {
         Swal.fire({
-            title: 'Thiếu!',
-            text: 'Bạn vui lòng đánh số sao',
+            text: 'Can you please rate the stars?',
             type: 'warning',
-            grow: 'row'
+            width : '250px'
         })
         return;
     }
 
     if(!binhLuan) {
         Swal.fire({
-            title: 'Thiếu!',
-            text: 'Bạn vui lòng để lại bình luận',
+            text: 'Please leave a comment',
             type: 'warning',
-            grow: 'row'
+            width : '250px'
         })
         $("#inpBinhLuan")[0].focus();
         return;

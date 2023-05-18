@@ -37,15 +37,15 @@ window.onload = function () {
 
 function xemChiTiet(mahd) {
     $.ajax({
-        type: "GET",
-        url: "php/tablechitietdonhang.php",
-        data: {
+        type: "GET",//Kiểu request muốn thực hiện,
+        url: "php/tablechitietdonhang.php",//Chuỗi chứa URL mà request được gửi đến
+        data: {//dữ liệu được gửi lên server khi thực thi một request Ajax
             mahd: mahd
         },
-        success: function(data) {
+        success: function(data) {// hàm được gọi khi request thành công
             $("#chitietdonhang").html(data);
         },
-        error: function(e) {
+        error: function(e) {//hàm được gọi khi request lỗi
             console.log(e.responseText);
         }
     });

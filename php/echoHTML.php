@@ -60,8 +60,8 @@ function addHeader()
                         Tài khoản
                     </a>
                     <div class="menuMember hide">
-                        <a href="nguoidung.php">Trang người dùng</a>
-                        <a onclick="checkDangXuat();">Đăng xuất</a>
+                        <a href="nguoidung.php">User Page</a>
+                        <a onclick="checkDangXuat();">Logout</a>
                     </div>
                 </div> <!-- End Member -->
 
@@ -76,7 +76,7 @@ function addHeader()
                 <!-- <div class="check-order">
                     <a>
                         <i class="fa fa-truck"></i>
-                        <span>Đơn hàng</span>
+                        <span>Order</span>
                     </a>
                 </div>  -->
             </div><!-- End Tools Member -->
@@ -663,12 +663,11 @@ function addPlc()
     <div class="plc">
         <section>
             <ul class="flexContain">
-                <li>Giao hàng hỏa tốc trong 1 giờ</li>
-                <li>Thanh toán linh hoạt: tiền mặt, visa / master, trả góp</li>
-                <li>Trải nghiệm sản phẩm tại nhà</li>
-                <li>Lỗi đổi tại nhà trong 1 ngày</li>
-                <li>Hỗ trợ suốt thời gian sử dụng.
-                    <br>Hotline:
+                <li>Express delivery in 1 hour</li>
+                <li>Flexible payment: cash, visa / master</li>
+                <li>Product experience at home</li>
+                <li>
+                    Hotline:
                     <a href="tel:12345678" style="color: #288ad6;">1234.5678</a>
                 </li>
             </ul>

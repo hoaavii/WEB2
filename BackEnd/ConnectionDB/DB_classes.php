@@ -132,7 +132,7 @@ class ChiTietHoaDonBUS extends DB_business
     function __construct()
     {
         $this->setTable("ChiTietHoaDon", "MaHD");
-        $this->_key2 = "MaSP";
+        // $this->_key2 = "MaSP";
     }
 
     // Hàm xóa theo id hóa đơn và id sản phẩm
@@ -146,7 +146,7 @@ class ChiTietHoaDonBUS extends DB_business
     {
         return $this->update($this->_table_name, $data, $this->_key . "='" . $id . "' AND " . $this->_key2 . "='" . $id2 . "'");
     }
-
+    
     // hàm select theo id hóa đơn + id sản phẩm
     function select_by_2id($select, $id, $id2)
     {
