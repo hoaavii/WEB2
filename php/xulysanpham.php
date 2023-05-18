@@ -65,15 +65,8 @@
                     'SoLuong' => $data['amount'],
                     'HinhAnh' => $data['img'],
                     'MaKM' => $data['promo']['name'],
-                    'ManHinh' => $data['detail']['screen'],
-                    'HDH' => $data['detail']['os'],
-                    'CamSau' => $data['detail']['camara'],
-                    'CamTruoc' => $data['detail']['camaraFront'],
-                    'CPU' => $data['detail']['cpu'],
-                    'Ram' => $data['detail']['ram'],
-                    'Rom' => $data['detail']['rom'],
-                    'SDCard' => $data['detail']['microUSB'],
-                    'Pin' => $data['detail']['battery'],
+                    'MoTa' => $data['detail']['describe'],
+                    'TrongLuong' => $data['detail']['weight'],
                     'SoSao' => $data['star'],
                     'SoDanhGia' => $data['rateCount'],
                     'TrangThai' => $data['TrangThai']
@@ -133,7 +126,7 @@
                     $sql .= ($sql==$ori?"":" AND ") . " DonGia >= $giaTu AND DonGia <= $giaDen";
                     break;
 
-                case 'company':
+                case 'category':
                     $companyID = $dauBang[1];
                     $sql .= ($sql==$ori?"":" AND ") . " MaLSP='$companyID'";
                     break;
@@ -210,15 +203,8 @@
             'SoLuong' => 10,
             'HinhAnh' => $sp['img'],
             'MaKM' => $sp['MaKM'],
-            'ManHinh' => $sp['detail']['screen'],
-            'HDH' => $sp['detail']['os'],
-            'CamSau' => $sp['detail']['camara'],
-            'CamTruoc' => $sp['detail']['camaraFront'],
-            'CPU' => $sp['detail']['cpu'],
-            'Ram' => $sp['detail']['ram'],
-            'Rom' => $sp['detail']['rom'],
-            'SDCard' => $sp['detail']['microUSB'],
-            'Pin' => $sp['detail']['battery'],
+            'MoTa' => $sp['detail']['describe'],
+            'TrongLuong' => $sp['detail']['weight'],
             'SoSao' => 0,
             'SoDanhGia' => 0,
             'TrangThai' => 1
