@@ -208,7 +208,60 @@ function checkDangKy() {
 
     return false;
 }
+function checkaddadmin() {
+    var ho = document.getElementById('ho').value;
+    var ten = document.getElementById('ten').value;
+    var sdt = document.getElementById('sdt').value;
+    var email = document.getElementById('email').value;
+    var diachi = document.getElementById('diachi').value;
+    var username = document.getElementById('newUser').value;
+    var pass = document.getElementById('newPass').value;
 
+    $.ajax({
+        url: "php/xulytaikhoan.php",
+        type: "post",
+        dataType: "json",
+        timeout: 1500,
+        data: {
+            request: 'dangkyadmin',
+            data_ho: ho,
+            data_ten: ten,
+            data_sdt: sdt,
+            data_email: email,
+            data_diachi: diachi,
+            data_newUser: username,
+            data_newPass: pass
+        },
+        success: function(kq) {
+            if(kq != null) {
+                Swal.fire({
+                    type: 'success',
+                    title: 'Đăng kí thành công ',
+                    confirmButtonText: 'Tuyệt'
+
+                });
+            }
+            if(kq == null){
+                Swal.fire({
+                    type: 'Error',
+                    title: 'Tài khoản đã tồn tại ',
+                    confirmButtonText: 'Quay lại'
+
+                });
+            }
+        },
+        error: function(e) {
+            Swal.fire({
+                type: "error",
+                title: "Lỗi",
+                // html: e.responseText
+            });
+            console.log(e.responseText)
+        }
+    });
+
+    return false;
+}
 function checkDangNhap() {
     var a = document.getElementById('username').value;
     var b = document.getElementById('pass').value;
@@ -255,6 +308,7 @@ function checkDangNhap() {
     });
     return false;
 }
+
 
 function checkDangXuat(onSuccess) {
     Swal.fire({

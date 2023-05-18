@@ -62,4 +62,15 @@ class DB_business extends DB_driver
         $sql = "select * from " . $this->_table_name;
         return $this->get_list($sql);
     }
+    function select_by_id1()
+    {
+        $sql = "select * from " . $this->_table_name . " where  MaQuyen = 1";
+        return $this->get_list($sql);
+    }
+    function select_by_id2()
+    {
+        $sql = "select * from " . $this->_table_name . " where MaQuyen = 2";
+        return $this->get_list($sql);
+    }
+
 }

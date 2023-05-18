@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Admin - Vegan Organic Food</title>
-	<link rel="shortcut icon" href="img/icon.png" />
+    <link rel="shortcut icon" href="img/icon.png" />
 
     <!-- Load font awesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
 
     <!-- Chart JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
@@ -27,7 +28,6 @@
     <!-- Our files -->
     <link rel="stylesheet" href="css/admin/style.css">
     <link rel="stylesheet" href="css/admin/progress.css">
-
     <!-- <script src="data/products.js"></script>
     <script src="js/classes.js"></script> -->
     <script src="js/dungchung.js"></script>
@@ -45,9 +45,14 @@
         <ul class="nav">
             <li class="nav-title">MENU</li>
             <!-- <li class="nav-item"><a class="nav-link active"><i class="fa fa-home"></i> Home</a></li> -->
-            <li class="nav-item" onclick="refreshTableSanPham()"><a class="nav-link"><i class="fa fa-th-large"></i> Sản Phẩm</a></li>
-            <li class="nav-item" onclick="refreshTableDonHang()"><a class="nav-link"><i class="fa fa-file-text-o"></i> Đơn Hàng</a></li>
-            <li class="nav-item" onclick="refreshTableKhachHang()"><a class="nav-link"><i class="fa fa-address-book-o"></i> Khách Hàng</a></li>
+            <li class="nav-item" onclick="refreshTableSanPham()"><a class="nav-link"><i class="fa fa-th-large"></i> Sản
+                    Phẩm</a></li>
+            <li class="nav-item" onclick="refreshTableDonHang()"><a class="nav-link"><i class="fa fa-file-text-o"></i>
+                    Đơn Hàng</a></li>
+            <li class="nav-item" onclick="refreshTableNhanVien()"><a class="nav-link"><i
+                        class="fa fa-address-book-o"></i> Nhân Viên</a></li>
+            <li class="nav-item" onclick="refreshTableKhachHang()"><a class="nav-link"><i
+                        class="fa fa-address-book-o"></i> Khách Hàng</a></li>
             <li class="nav-item"><a class="nav-link"><i class="fa fa-bar-chart-o"></i> Thống Kê</a></li>
             <hr>
             <li class="nav-item">
@@ -64,18 +69,81 @@
         <div class="home">
 
         </div>
-
+        <!-- Thêm nhân viên -->
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Nhân viên mới</h1>
+                <!-- <form onsubmit="return signUp(this);"> -->
+                <form action="" method="post" name="formDangKy" onsubmit="return checkaddadmin();">
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                LastName<span class="req">*</span>
+                            </label>
+                            <input name="ho" type="text" id="ho" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                FirstName<span class="req">*</span>
+                            </label>
+                            <input name="ten" id="ten" type="text" required autocomplete="off" />
+                        </div>
+                    </div> <!-- / ho ten -->
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                PhoneNumber<span class="req">*</span>
+                            </label>
+                            <input name="sdt" id="sdt" type="text" pattern="\d*" minlength="10" maxlength="12" required
+                                autocomplete="off" />
+                        </div> <!-- /sdt -->
+                        <div class="field-wrap">
+                            <label>
+                                Email<span class="req">*</span>
+                            </label>
+                            <input name="email" id="email" type="email" required autocomplete="off" />
+                        </div> <!-- /email -->
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Address<span class="req">*</span>
+                        </label>
+                        <input name="diachi" id="diachi" type="text" required autocomplete="off" />
+                    </div> <!-- /user name -->
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        <input name="newUser" id="newUser" type="text" required autocomplete="off" />
+                    </div> <!-- /user name -->
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input name="newPass" id="newPass" type="password" required autocomplete="off" />
+                    </div> <!-- /pass -->
+                    <button type="submit" class="button button-block" />Create</button>
+                </form>
+                <!-- /form -->
+            </div> <!-- /sign up -->
+        </div><!-- tab-content -->
         <!-- Sản Phẩm -->
         <div class="sanpham">
             <table class="table-header">
                 <tr>
                     <!-- Theo độ rộng của table content -->
-                    <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('stt')">Stt <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('masp')">Mã <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 40%" onclick="sortProductsTable('ten')">Tên <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 15%" onclick="sortProductsTable('gia')">Giá <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('khuyenmai')">Khuyến mãi <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('gia')">Trạng thái <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('stt')">Stt <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('masp')">Mã <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 40%" onclick="sortProductsTable('ten')">Tên <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 15%" onclick="sortProductsTable('gia')">Giá <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('khuyenmai')">Khuyến mãi <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('gia')">Trạng thái <i
+                            class="fa fa-sort"></i></th>
                     <th style="width: 10%">Hành động</th>
                 </tr>
             </table>
@@ -85,13 +153,13 @@
 
             <!--<div class="table-content">
             <?php
-                require_once('BackEnd/ConnectionDB/DB_classes.php');
+            require_once('BackEnd/ConnectionDB/DB_classes.php');
 
-                $sp = new SanPhamBUS();
-                $i = 1;
-                echo "<table class='table-outline hideImg'>";
-                foreach ($sp->select_all() as $rowname => $row) {
-                    echo "<tr>
+            $sp = new SanPhamBUS();
+            $i = 1;
+            echo "<table class='table-outline hideImg'>";
+            foreach ($sp->select_all() as $rowname => $row) {
+                echo "<tr>
                         <td style'width: 5%'>" . $i++ . "</td>
                         <td style='width: 10%'>" . $row['MaSP'] . "</td>
                         <td style='width: 40%'>
@@ -111,8 +179,8 @@
                             </div>
                         </td>
                     </tr>";
-                }
-                echo "</table>";
+            }
+            echo "</table>";
             ?>
             </div>-->
 
@@ -122,7 +190,8 @@
                     <option value="ten">Tìm theo tên</option>
                 </select>
                 <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemSanPham(this)">
-                <button onclick="document.getElementById('khungThemSanPham').style.transform = 'scale(1)'; autoMaSanPham()">
+                <button
+                    onclick="document.getElementById('khungThemSanPham').style.transform = 'scale(1)'; autoMaSanPham()">
                     <i class="fa fa-plus-square"></i>
                     Thêm sản phẩm
                 </button>
@@ -158,34 +227,30 @@
                             </td>
                         </tr>
                         <?php
-                            $tenfilemoi= "";
-                                if (isset($_POST["submit"]))
-                                {
-                                    if (($_FILES["hinhanh"]["type"]=="image/jpeg") ||($_FILES["hinhanh"]["type"]=="image/png") || ($_FILES["hinhanh"]["type"]=="image/jpg") && ($_FILES["hinhanh"]["size"] < 50000) )
-                                    {
-                                        if ($_FILES["file"]["error"] > 0 || file_exists("img/products/" . basename($_FILES["hinhanh"]["name"]))) 
-                                        {
-                                            echo ("Error Code: " . $_FILES["file"]["error"] . "<br />Chỉnh sửa ảnh lại sau)");
-                                        }
-                                        else
-                                        {
-                                            /*$tmp = explode(".", $_FILES["hinhanh"]["name"]);
-                                            $duoifile = end($tmp);
-                                            $masp = $_POST['maspThem'];
-                                            $tenfilemoi = $masp . "." . $duoifile;*/
-                                            $file = $_FILES["hinhanh"]["name"];
-                                            $tenfilemoi = "img/products/" .$_FILES["hinhanh"]["name"];
-                                            move_uploaded_file( $_FILES["hinhanh"]["tmp_name"], $tenfilemoi);
-                                        }
-                                    }
+                        $tenfilemoi = "";
+                        if (isset($_POST["submit"])) {
+                            if (($_FILES["hinhanh"]["type"] == "image/jpeg") || ($_FILES["hinhanh"]["type"] == "image/png") || ($_FILES["hinhanh"]["type"] == "image/jpg") && ($_FILES["hinhanh"]["size"] < 50000)) {
+                                if ($_FILES["file"]["error"] > 0 || file_exists("img/products/" . basename($_FILES["hinhanh"]["name"]))) {
+                                    echo ("Error Code: " . $_FILES["file"]["error"] . "<br />Chỉnh sửa ảnh lại sau)");
+                                } else {
+                                    /*$tmp = explode(".", $_FILES["hinhanh"]["name"]);
+                                    $duoifile = end($tmp);
+                                    $masp = $_POST['maspThem'];
+                                    $tenfilemoi = $masp . "." . $duoifile;*/
+                                    $file = $_FILES["hinhanh"]["name"];
+                                    $tenfilemoi = "img/products/" . $_FILES["hinhanh"]["name"];
+                                    move_uploaded_file($_FILES["hinhanh"]["tmp_name"], $tenfilemoi);
                                 }
+                            }
+                        }
                         // require_once ("php/uploadfile.php");
                         ?>
                         <tr>
                             <td>Hình:</td>
                             <td>
                                 <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
-                                <input type="file" name="hinhanh" onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem', '<?php echo $tenfilemoi; ?>')">
+                                <input type="file" name="hinhanh"
+                                    onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem', '<?php echo $tenfilemoi; ?>')">
                                 <input style="display: none;" type="text" id="hinhanh" value="">
                             </td>
                         </tr>
@@ -246,13 +311,20 @@
             <table class="table-header">
                 <tr>
                     <!-- Theo độ rộng của table content -->
-                    <th title="Sắp xếp" style="width: 5%" onclick="sortDonHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 13%" onclick="sortDonHangTable('madon')">Mã đơn <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 7%" onclick="sortDonHangTable('khach')">Khách <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 20%" onclick="sortDonHangTable('sanpham')">Sản phẩm <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 15%" onclick="sortDonHangTable('tongtien')">Tổng tiền <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 10%" onclick="sortDonHangTable('ngaygio')">Ngày giờ <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" style="width: 10%" onclick="sortDonHangTable('trangthai')">Trạng thái <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 5%" onclick="sortDonHangTable('stt')">Stt <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 13%" onclick="sortDonHangTable('madon')">Mã đơn <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 7%" onclick="sortDonHangTable('khach')">Khách <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 20%" onclick="sortDonHangTable('sanpham')">Sản phẩm <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 15%" onclick="sortDonHangTable('tongtien')">Tổng tiền <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 10%" onclick="sortDonHangTable('ngaygio')">Ngày giờ <i
+                            class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" style="width: 10%" onclick="sortDonHangTable('trangthai')">Trạng thái <i
+                            class="fa fa-sort"></i></th>
                     <th style="width: 10%">Hành động</th>
                 </tr>
             </table>
@@ -278,17 +350,17 @@
 
         </div> <!-- // don hang -->
 
-
-        <!-- Khách hàng -->
-        <div class="khachhang">
+        <!-- Nhân viên -->
+        <div class="nhanvien">
             <table class="table-header">
                 <tr>
                     <!-- Theo độ rộng của table content -->
-                    <th title="Sắp xếp"  onclick="sortKhachHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp"  onclick="sortKhachHangTable('hoten')">Họ tên <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp"  onclick="sortKhachHangTable('email')">Email <i class="fa fa-sort"></i></th>
-                    <th title="Sắp xếp" onclick="sortKhachHangTable('taikhoan')">Tài khoản <i class="fa fa-sort"></i></th>
-                
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('hoten')">Họ tên <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('email')">Email <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('taikhoan')">Tài khoản <i class="fa fa-sort"></i>
+                    </th>
+
                     <th style="width: 10%">Hành động</th>
                 </tr>
             </table>
@@ -304,6 +376,33 @@
                 </select>
                 <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemNguoiDung(this)">
                 <button onclick="openThemNguoiDung()"><i class="fa fa-plus-square"></i> Thêm người dùng</button>
+            </div>
+        </div> <!-- // nhanvien -->
+        <!-- Khách hàng -->
+        <div class="khachhang">
+            <table class="table-header">
+                <tr>
+                    <!-- Theo độ rộng của table content -->
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('hoten')">Họ tên <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('email')">Email <i class="fa fa-sort"></i></th>
+                    <th title="Sắp xếp" onclick="sortKhachHangTable('taikhoan')">Tài khoản <i class="fa fa-sort"></i>
+                    </th>
+
+                    <th style="width: 10%">Hành động</th>
+                </tr>
+            </table>
+
+            <div class="table-content">
+            </div>
+
+            <div class="table-footer">
+                <select name="kieuTimKhachHang">
+                    <option value="ten">Tìm theo họ tên</option>
+                    <option value="email">Tìm theo email</option>
+                    <option value="taikhoan">Tìm theo tài khoản</option>
+                </select>
+                <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemNguoiDung(this)">
             </div>
         </div> <!-- // khach hang -->
 
