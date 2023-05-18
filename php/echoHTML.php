@@ -448,27 +448,11 @@ function addChiTietSanPham()
                     <i class="fa fa-clock-o"></i>
                     <div>Delivery in 1 hour</div>
                 </div>
-                <div class="area_promo">
-                    <strong>Promotion</strong>
-                    <div class="promo">
-                        <i class="fa fa-check-circle"></i>
-                        <div id="detailPromo" style = "display: none;"> </div>
-                    </div>
+
+                <div class = "detail-area">
+
                 </div>
-                <div class="policy">
-                    <div>
-                        <i class="fa fa-archive"></i>
-                        <p></p>
-                    </div>
-                    <div>
-                        <i class="fa fa-star"></i>
-                        <p></p>
-                    </div>
-                    <div class="last">
-                        <i class="fa fa-retweet"></i>
-                        <p></p>
-                    </div>
-                </div>
+                
                 <div class="area_order">    
                     <!-- nameProduct là biến toàn cục được khởi tạo giá trị trong phanTich_URL_chiTietSanPham -->
                     <a class="buy_now" onclick="themVaoGioHang(maProduct, nameProduct);">
@@ -476,12 +460,7 @@ function addChiTietSanPham()
                     </a>
                 </div>
             </div>
-            <div class="info_product">
-                <h2>Details</h2>
-                <ul class="info">
 
-                </ul>
-            </div>
         </div>
         <hr>
         <div class="comment-area">

@@ -81,14 +81,20 @@ function addChiTietToWeb(p) {
         area_price.innerHTML = `<strong>` + giaTri.toLocaleString() + `&#8363;</strong>` + khuyenmaidiv;
     }
 
-    // Cập nhật chi tiết khuyến mãi
-    document.getElementById('detailPromo').innerHTML = getDetailPromo(p);
+   // Cập nhật chi tiết khuyến mãi
+    // document.getElementById('detailPromo').innerHTML = getDetailPromo(p);
 
     // Cập nhật thông số
-    var info = document.getElementsByClassName('info')[0];
-    var s = "";
-    var s = addThongSo('Mô tả', p.MoTa);
-    s += addThongSo('Trọng lượng', p.TrongLuong);
+    // var info = document.getElementsByClassName('info')[0];
+    // var s = "";
+    // var s = addThongSo('Mô tả', p.MoTa);
+    // s += addThongSo('Trọng lượng', p.TrongLuong);
+    // info.innerHTML = s;
+    
+    //cập nhật mô tả
+    var info = divChiTiet.getElementsByClassName('detail-area')[0];
+    var s = addDescribe(p.MoTa);
+    console.log(p.MoTa);
     info.innerHTML = s;
 
     // Cập nhật hình
@@ -241,11 +247,15 @@ function getDetailPromo(sp) {
     }
 }
 
-function addThongSo(ten, giatri) {
-    return `<li>
-                <p>` + ten + `</p>
-                <div>` + giatri + `</div>
-            </li>`;
+// function addThongSo(ten, giatri) {
+//     return `<li>
+//                 <p>` + ten + `</p>
+//                 <div>` + giatri + `</div>
+//             </li>`;
+// }
+
+function addDescribe(value) {
+    return `<div>` + value + `</div>`;
 }
 
 function createComment(name, value, star, time) {

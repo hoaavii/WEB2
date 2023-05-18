@@ -28,6 +28,7 @@
 
 .rowdetail {
     display: flex;
+    justify-content: space-between;
     border-top: 1px solid #e5e5e5;
     padding: 15px 0;
     margin-top: 5px;
@@ -37,7 +38,7 @@
 .picture {
     float: left;
     overflow: hidden;
-    width: 33%;
+    width: 49%;
     position: relative;
     /*định vị trí phụ thuộc vào thành phần bao ngoài*/
     display: block;
@@ -55,7 +56,7 @@
 .price_sale {
     float: left;
     position: relative;
-    width: 33%;
+    width: 50%;
     display: block;
 }
 
@@ -184,6 +185,10 @@
     margin: 2px 0 0 -20px;
 }
 
+.detail-area {
+    margin: 20px 0 20px 10px;
+}
+
 .area_order {
     display: block;
     overflow: hidden;
@@ -257,7 +262,7 @@
 }
 
 .info_product {
-    width: 33%;
+    /* width: 33%; */
     border: 1px solid #ddd;
     float: left;
     border-radius: 3px;
@@ -377,7 +382,7 @@
 /* ================== Binh luan ==================*/
 .guiBinhLuan {
     box-sizing: border-box;
-    border: 5px solid #ffefcd;
+    border: 1px solid #feb142;
 }
 
 #inpBinhLuan {
