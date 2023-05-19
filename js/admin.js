@@ -763,11 +763,11 @@ function addTableDonHang(data) {
             <td style="width: 5%">` + (i + 1) + `</td>
             <td style="width: 13%">` + d.MaHD + `</td>
             <td style="width: 7%">` + d.MaND + `</td>
-            <td style="width: 20%">` + d.sp + `</td>
+            <!--<td style="width: 20%">` + d.sp + `</td>-->
             <td style="width: 15%">` + d.TongTien + `</td>
             <td style="width: 10%">` + d.NgayLap + `</td>
-            <td style="width: 10%">` + d.TinhTrang + `</td>
-            <td style="width: 10%">
+            <td style="width: 10%">` + d.TrangThai + `</td>
+            <!--<td style="width: 10%">
                 <div class="tooltip">
                     <i class="fa fa-check" onclick="duyet('` + d.MaHD + `', true)"></i>
                     <span class="tooltiptext">Duyệt</span>
@@ -777,7 +777,7 @@ function addTableDonHang(data) {
                     <span class="tooltiptext">Hủy</span>
                 </div>
                 
-            </td>
+            </td>-->
         </tr>`;
     }
 
